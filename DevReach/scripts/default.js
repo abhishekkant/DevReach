@@ -1,7 +1,7 @@
 // JavaScript Document
 'use strict';
 
-var everliveKey = 'SpQUwGVV7vOClKNx';
+var everliveKey = 'DJOOCpPmPJe2fJ8s';
 var GoogleProjectID = '541570376695';
 var app;
 var dateData = [{"dateTitle":"Day 1", "dateValue":"8/24/2013"}, 
