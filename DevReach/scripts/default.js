@@ -1017,7 +1017,7 @@ function initMap() {
     
     var mapOptions = {
         sensor: true,
-        center: new google.maps.LatLng(28.547222200000000000, 77.250833300000070000),
+        center: new google.maps.LatLng(42.6579137,23.3158414),
         zoom: 10,
         mapTypeId: google.maps.MapTypeId.ROADMAP,
         streetViewControl: false,
@@ -1035,10 +1035,10 @@ function initMap() {
     map = new google.maps.Map($("#map_canvas")[0], mapOptions);
 
     destinationPoint = new google.maps.Marker({
-        position: new google.maps.LatLng(18.533979,73.829921),
+        position: new google.maps.LatLng(42.6579137,23.3158414),
         color: "green",
         map: map, 
-        title: "that Conference"
+        title: "DevReach"
     });
     
     sourcePoint = new google.maps.Marker({
