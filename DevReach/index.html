@@ -495,7 +495,9 @@
       
         <div id="timingSessionListView" data-role="view" data-title="Sessions" data-show="sessionTimeClick">
             
-              <ul id="sessionListView"></ul>
+              <ul id="sessionListView">
+                  
+              </ul>
         </div>
         
   <script type="text/x-kendo-template" id="timingListtemplate">
@@ -504,7 +506,7 @@
         </script>
         
 <!-- This view is for showing timing list -->
-        <div id="timingView" data-role="view" class="listsbgs" >
+        <div id="timingView" data-role="view" class="listsbgs" data-show="dayshow" >
             <ul id="timingListView"
                 data-role = "listview"
                 data-template = "timingListtemplate"

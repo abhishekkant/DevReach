@@ -14,6 +14,14 @@ var dateDS = new kendo.data.DataSource({
     data: dateData 
 });
 
+function dayshow()
+{
+    console.log("dayshow");
+    dateDS.fetch();
+    console.log(dateDS);
+    
+}
+
 // PhoneGap is ready
 function onDeviceReady() {
      $('#ratingSession').ratings(5).bind('ratingchanged', function (event, data) {
@@ -413,10 +421,12 @@ function venueListViewClick(e) {
 // function to retrieve sessions for a specific date 
 
 function sessionTimeClick(e) {
+    
     var selectedDate = new Date(e.view.params.selDate);
     var selDay = selectedDate.getDate();
     var selMonth = selectedDate.getMonth() + 1;
     var selYear = selectedDate.getFullYear();
+    
    var sessionTimeDS = new kendo.data.DataSource({
     type:"odata",
     transport: {
@@ -429,12 +439,21 @@ function sessionTimeClick(e) {
                 }
     }
 });
+    
+    console.log("hi");
+    sessionTimeDS.fetch();
+    console.log(sessionTimeDS);
+    console.log("hello");
+   
     var sessionTimeListtemplate = kendo.template($("#sessionTimeListtemplate").html());
-    $("#timingListView").kendoMobileListView({
-        style:"inset",
+    $("#sessionListView").kendoMobileListView({
         dataSource: sessionTimeDS,
-        template: sessionTimeListtemplate
+        template: sessionTimeListtemplate,
+        style:"inset"
     });
+    
+    
+    
 }
 
                
