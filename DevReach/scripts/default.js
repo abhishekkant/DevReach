@@ -974,18 +974,16 @@ function submitRatingsEverlive(e) {
         //PUGEverliveDS.fetch();
         console.log('Filled PUG DS');
         var myreviewLS = JSON.parse(localStorage["myReview"]);
-        data.create(myreviewLS);
+        data.create(myreviewLS,
+        function(data){
+        alert("Ratings successfully submitted");
+    },
+        function(error){
+        alert("Ratings were not successfully sent");
+    });
         console.log('Now Deleting');
         localStorage.removeItem("myReview");
         console.log('Deleted');
-       /*$.each(myreviewLS, function(i,objval) {
-            console.log(objval);
-            var newReview = objval;
-            PUGEverliveDS.add(newReview);
-        });
-         console.log('Sending Data');
-        PUGEverliveDS.sync();
-         console.log('Data Sent');*/
     }
     else
     {
