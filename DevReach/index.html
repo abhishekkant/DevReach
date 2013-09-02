@@ -188,7 +188,7 @@
         
  <!-- This view is meant for sponsors -->
 
-		<div data-role="view" id="sponsors" data-title="Sponsors" data-show="showSponsors">
+		<div data-role="view" id="sponsors" data-title="Sponsors" class="listsbg">
 			<div id="sponsorsPage">
                 <big>Organizers</big>
 				<ul id="Organizers" style="list-style: none;">
@@ -202,7 +202,7 @@
 					   <li><a href="http://www.tradologic.com/" rel="external"><img src="Images876/Sponsors/tradologic_54.png" /></a></li>
                     <li><a href="http://www.sbtech.com/" rel="external"><img src="Images876/Sponsors/sbtech-132.png"/></a></li>
                     <li><a href="http://www.milestonesys.com/" rel="external"><img src="Images876/Sponsors/milestone_logo_tag3.png"/></a></li>
-                    <li><a href="http://pluralsight.com/ rel="external"><img src="Images876/Sponsors/pluralsightfinal.gif"/></a></li>
+                    <li><a href="http://pluralsight.com/" rel="external"><img src="Images876/Sponsors/pluralsightfinal.gif"/></a></li>
                     <li><a href="http://www.falafel.com/" rel="external"><img src="Images876/Sponsors/falafellogo132.png"/></a></li>
                     <li><a href="http://mentormate.bg/" rel="external"><img src="Images876/Sponsors/logo-no-slogan.png"/></a></li>
                       <li><a href="http://www.icn.bg/" rel="external"><img src="Images876/Sponsors/icn132.gif"/></a></li>
@@ -342,7 +342,7 @@
         
         <!-- This view is Setting View -->
 
-		<div data-role="view" id="settingsView" data-title="Setting" data-show="checkPersonalSettings">
+		<div data-role="view" id="settingsView" data-title="My Settings" data-show="checkPersonalSettings">
 
 			<table>
 				<tr>
@@ -371,11 +371,21 @@
 					</td>
 				</tr>
                 <tr>
+					<td colspan="2">
+						<hr />
+					</td>
+				</tr>
+                 <tr>
+					<td colspan="2">
+						<h3>Maintenance:</h3>
+					</td>
+				</tr>
+                <tr>
                     <td>
 						<a id="refreshAllSessionData" data-click="refreshAllSessionsData" data-role="button">Refresh Saved Data</a>
 					</td>
 					<td>
-						<a id="submitRatings" data-click="submitRatingsEverlive" data-role="button">Submit Ratings</a>
+						<a id="submitRatings" data-click="submitRatingsEverlive" data-role="button">Sync Ratings</a>
 					</td>
 				</tr>
                 <tr>
@@ -494,9 +504,7 @@
         
       
         <div id="timingSessionListView" data-role="view" data-title="Sessions" data-show="sessionTimeClick">
-            
-              <ul id="sessionListView">
-                  
+              <ul id="sessionListView">  
               </ul>
         </div>
         
@@ -533,10 +541,10 @@
             <div id="sessionRName">
               Comments:
             </div> 
-            <textarea id="txtReview"  rows="8"></textarea>
+            <textarea id="txtReview" style="color:#000000" rows="7"></textarea>
 			<br/>
-			<a id="submitReviewButton" data-click="submitReview" data-role="button" data-align="center">Save Ratings</a>
-            <a href="#settingsView" id="sendRatings" data-role="button">Submit Ratings</a>
+			<a id="submitReviewButton" data-click="submitReview" data-role="button" data-align="center">Save Ratings Locally</a>
+            <!--<a href="#settingsView" id="sendRatings" data-role="button">Sync Ratings</a>-->
   
             <div id="sessionID" style="display:none;"></div>
 		</div>

@@ -921,6 +921,7 @@ function savePersonalDetailsfn() {
     var obj2 = {'isAnonymous': $('#isAnonymous').data("kendoMobileSwitch").check()}
     personalDetails.push(obj2);
     localStorage['myDetails'] = JSON.stringify(personalDetails);
+    alert("Personal Details Saved");
 }
 
 function checkPersonalSettings() {
@@ -953,25 +954,26 @@ function submitReview(e) {
     // Add personal details to the ratings
     if (localStorage['myDetails']) {
         var personalDetails = JSON.parse(localStorage['myDetails']);
+        var isAnony = personalDetails[2].isAnonymous;
+        if (!isAnony) {
         item.name = personalDetails[0].name;
         item.email = personalDetails[1].email;
+            }
         
     }
     
     var myreview = JSON.parse(localStorage.myReview);          
     myreview.push(item);    
     localStorage["myReview"] = JSON.stringify(myreview); 
-    $("#modalview-reviewsaved").data("kendoMobileModalView").open();
+    app.navigate("#settingsView");
+   // $("#modalview-reviewsaved").data("kendoMobileModalView").open();
 }
 
 
 function submitRatingsEverlive(e) {
     if (localStorage.myReview)
     {
-        
         var data = Everlive.$.data('SessionRatingsbyUser');
-        
-        //PUGEverliveDS.fetch();
         console.log('Filled PUG DS');
         var myreviewLS = JSON.parse(localStorage["myReview"]);
         data.create(myreviewLS,
@@ -1223,10 +1225,4 @@ function refreshAllSessionsData()
     if (localStorage.venues)
     localStorage.removeItem("venues");
     
-}
-
-
-function showSponsors()
-{
-    var sponsors = [  ]
 }
