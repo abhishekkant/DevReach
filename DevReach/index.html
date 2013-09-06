@@ -15,11 +15,35 @@
     
 	<body  id="body">
         
+        
+        <!-- Drawer -->
+       <!-- <div data-role="drawer" id="my-drawer" style="width: 270px" data-views="['allsession', 'venuesession', 'sessionbyspeaker', 'timingView', 'tracksession']">
+    <ul data-role="listview" data-type="group">
+        <li>All Sessions
+            <ul>
+                <li data-icon="inbox"><a href="#allsession" data-transition="none">All</a></li>
+                <li data-icon="star"><a href="#venuesession" data-transition="none">By Venue</a></li>
+                <li data-icon="compose"><a href="#sessionbyspeaker" data-transition="none">By Speaker</a></li>
+                <li data-icon="sent"><a href="#timingView" data-transition="none">By Day</a></li>
+                <li data-icon="trash"><a href="#tracksession" data-transition="none">Track</a></li>
+             
+            </ul>
+        </li>
+        
+    </ul>
+</div>-->
+        
  <!--Home View -->  
  <div data-role="view" id="home" data-title="DevReach Conference" data-layout="home-layout">
+    
 			<div data-role="content" id="home-content">
 				<div id="home-header">
+                    
+                      
+                    
 				</div>
+                
+                
 				<div id="tile-list">
 					<div class="tile">
 					<a href="#myagenda">
@@ -28,13 +52,19 @@
 					</a>
 					</div>
 
+                    
+                    
+                              
+                    
 					<div class="tile">
 					<a href="#sessions">
 							<img src="dicons/sessions_256.png" class="tile-image" />
 							Sessions
 						</a>
                         
-					</div>	
+					</div>
+                    
+                    
                     <div class="tile">
 						<a href="#speakers">
 							<img src="dicons/exchange_256.png" class="tile-image" />
@@ -398,6 +428,12 @@
 						<a id="unregisterForNotification" data-click="removeFromNotification" data-role="button">Stop Notifications</a>
 					</td>
 				</tr>
+                
+               <!-- <tr>
+					<td colspan="2">
+						<a id="loginFB" data-click="fbLogin" data-role="button">Login with FB</a>
+					</td>
+				</tr>-->
 			</table>
 
 		</div>
