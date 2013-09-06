@@ -8,7 +8,10 @@ var dateData = [{"dateTitle":"Day 1", "dateValue":"10/01/2013"},
     {"dateTitle":"Day 2", "dateValue":"10/02/2013"}
 ];
 
-
+var speakerDetailsData;
+var baseURL = "http://devreachservice.telerikindia.com/EventNetworkingService.svc";
+var c;
+var dataReadFromLocalStorage;  
 var dateDS = new kendo.data.DataSource({
     data: dateData 
 });
@@ -38,13 +41,6 @@ function onDeviceReady() {
 
 // Wait for PhoneGap to load
 document.addEventListener("deviceready", onDeviceReady, false);
-
-var speakerDetailsData;
-var baseURL = "http://pugdevconservice.telerikindia.com/EventNetworkingService.svc";
-var c;
-var dataReadFromLocalStorage;    
-
-
 
 var tweets = new kendo.data.DataSource(
     {

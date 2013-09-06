@@ -11,7 +11,7 @@
     <DeviceOrientations>Portrait;Landscape</DeviceOrientations>
     <iOSStatusBarStyle>Default</iOSStatusBarStyle>
     <AndroidHardwareAcceleration>false</AndroidHardwareAcceleration>
-    <BundleVersion>0.9</BundleVersion>
+    <BundleVersion>0.8</BundleVersion>
     <iOSDisplayName>DevReach</iOSDisplayName>
     <iOSDeviceFamily>1;2</iOSDeviceFamily>
     <iOSBackgroundMode />
