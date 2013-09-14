@@ -3,6 +3,9 @@
 
 var everliveKey = 'DJOOCpPmPJe2fJ8s';
 var GoogleProjectID = '541570376695';
+ var el = new Everlive({
+        apiKey: everliveKey
+    });
 var app;
 var dateData = [{"dateTitle":"Day 1", "dateValue":"10/01/2013"}, 
     {"dateTitle":"Day 2", "dateValue":"10/02/2013"}
@@ -1224,7 +1227,7 @@ function refreshAllSessionsData()
 }
 
 
-/*function getParameterByName(name, url) {
+function getParameterByName(name, url) {
 	name = name.replace(/[\[]/, "\\\[").replace(/[\]]/, "\\\]");
 	var regexS = name + "=([^&#]*)";
  			
@@ -1248,54 +1251,60 @@ function refreshAllSessionsData()
 
 var IdentityProvider = function (config) {
 	var that = this;
+    var ref;
+	
     
-	this.getAccessToken = function(callback) {
-		console.log("Begin authorization with: " + config.providerName);
-		// Begin Authorization
-		var authorize_url = config.endpoint
-							+ "?response_type=" + config.response_type
-							+ "&client_id=" + config.client_id
-							+ "&redirect_uri=" + config.redirect_uri
-							+ "&display=" + config.display
-							+ "&access_type=" + config.access_type
-							+ "&scope=" + config.scope
+    this.getAccessToken = function(callback) {
+        
+        // Begin Authorization
+        var authorize_url = config.endpoint
+                            + "?response_type=" + config.response_type
+                            + "&client_id=" + config.client_id
+                            + "&redirect_uri=" + config.redirect_uri
+                            + "&display=" + config.display
+                            + "&access_type=" + config.access_type
+                            + "&scope=" + config.scope
    
-		//CALL IN APP BROWSER WITH THE LINK
-		ref = window.open(authorize_url, '_blank', 'location=no');
-		console.log(authorize_url)
+        //CALL IN APP BROWSER WITH THE LINK
+        ref = window.open(authorize_url, '_blank', 'location=no');
         
-		console.log("Attaching loadstart event")
-		ref.addEventListener('loadstart', function(event) {
-			console.log("loadstart event handler")
-			//that.facebookLocChanged(event.url, callback);
-		});
+        ref.addEventListener('loadstart', function(event) {
+            that.locationChanged(event.url, callback);
+        });
         
-		console.log("Attaching loadstop event")
-		ref.addEventListener('loadstop', function(event) {
-			console.log("loadstop event handler")
-			that.locationChanged(event.url, callback);
-		});
-	}
+        ref.addEventListener('loadstop', function(event) {
+            that.locationChanged(event.url, callback);
+        });
+        
+       
+    }
     
-	this.locationChanged = function(loc, callback) {
-		console.log("Current location: " + loc)
-		if (loc.indexOf("access_token=") != -1) {
-			ref.close();
-			console.log(loc);
-			var token = getParameterByName("access_token", loc);
-            
+    this.locationChanged = function(loc, callback) {
+        if (loc.indexOf("access_token=") != -1) {
+            ref.close();  
+            var token = getParameterByName("access_token", loc);
             callback(token);
-		} else {
-            console.log("No access_token in url.")
         }
-	}
+    }
 }
 
 
+ var facebook = new IdentityProvider({
+        name: "Facebook",
+        loginMethodName: "loginWithFacebook",
+        endpoint: "https://www.facebook.com/dialog/oauth",
+        response_type:"token",
+        client_id: "622842524411586",
+        redirect_uri:"https://www.facebook.com/connect/login_success.html",
+        access_type:"online",
+        scope:"email",
+        display: "touch"
+    });
 
 function fbLogin()
 {
-    var facebookConfig = {
+     app.showLoading();
+    /*var facebookConfig = {
 			name: "Facebook",
 			loginMethodName: "loginWithFacebook",
 			endpoint: "https://www.facebook.com/dialog/oauth",
@@ -1303,23 +1312,38 @@ function fbLogin()
 			client_id: "622842524411586",
 			redirect_uri:"https://www.facebook.com/connect/login_success.html",
 			access_type:"online",
-			scope:"email",
+			scope:"email,publish_stream",
 			display: "touch"
 		};
-		var facebook = new IdentityProvider(facebookConfig); 
+    
+		var facebook = new IdentityProvider(facebookConfig); */
+    
+    var fbToken;
     
     facebook.getAccessToken(function(token) {
-				Everlive.$.Users.loginWithFacebook(token)
-				.then(function(res) {
-					console.log(res);
+                alert("start");
+				el.Users.loginWithFacebook(token)
+				.then(function() {
+					fbToken = token;
 					var message = "Welcome to Everlive!";
+                    
 					navigator.notification.alert(message, function() {
-					}, "Everlive")
-				}, function(err) {
-					console.log(err);
-					navigator.notification.alert(err.message, function() {
-					}, "Everlive")
-				})
+					})
+				
 			})
+        .then(function () {
+                    app.hideLoading();
+                    app.navigate('#home');
+                })
+         .then(null, function (err) {
+                    app.hideLoading();
+                    if (err.code = 214) {
+                        showError("The specified identity provider is not enabled in the backend portal.");
+                    }
+                    else {
+                        showError(err.message);
+                    }
+                });
+        })
 		
-}*/
+}
