@@ -6,6 +6,7 @@ var GoogleProjectID = '541570376695';
  var el = new Everlive({
         apiKey: everliveKey
     });
+var fbClientID="1378904992343802";
 var app;
 var dateData = [{"dateTitle":"Day 1", "dateValue":"10/01/2013"}, 
     {"dateTitle":"Day 2", "dateValue":"10/02/2013"}
@@ -1294,7 +1295,7 @@ var IdentityProvider = function (config) {
         loginMethodName: "loginWithFacebook",
         endpoint: "https://www.facebook.com/dialog/oauth",
         response_type:"token",
-        client_id: "1378904992343802",
+        client_id: fbClientID,
         redirect_uri:"https://www.facebook.com/connect/login_success.html",
         access_type:"online",
         scope:"email,publish_actions",
@@ -1310,7 +1311,6 @@ function fbLogin()
 
         el.Users.loginWithFacebook(token)
 				.then(function() {
-
                      localStorage["fbToken"] = JSON.stringify(token);
 					var message = "Saved to Everlive!";
                     fbT = token;
@@ -1337,31 +1337,37 @@ function fbLogin()
         })
          .then(null, function (err) {
                     app.hideLoading();
-                    if (err.code = 214) {
-                        alert("The specified identity provider is not enabled in the backend portal.");
+                   // if (err.code = 214) {
+                     
                         alert(err.message);
-                    }
-                    else {
-                        alert(err.message);
-                    }
+                    
                 });
         })
 		
 }
 
 
-function fbPost()
+function fbPost() {
+    var fbT = localStorage.fbToken;
+    if (fbT != null) {
+        makefbPost("Post from DevReach Companion App", "http://www.devreach.com", "DevReach", fbT);    
+    }
+    else {
+        facebook.getAccessToken(function(token) {
+            makefbPost("Post from DevReach Companion App", "http://www.devreach.com", "DevReach", token);      
+        }); 
+    }
+}
+
+function makefbPost(FBmessage, FBLink, FBLinkName, fbToken)
 {
-    
-    facebook.getAccessToken(function(token) {
-
-         var postURL = "https://graph.facebook.com/me/feed";
+        var postURL = "https://graph.facebook.com/me/feed";
     var data = {};
-            data.message = "Post from DevReach Companion App";
-        data.name = "DevReach";
-    data.link = "http://www.devreach.com";
+            data.message = FBmessage;
+        data.name = FBLinkName;
+    data.link = FBLink;
 
-   data.access_token = token;
+   data.access_token = fbToken;
     
         
         
@@ -1373,8 +1379,5 @@ function fbPost()
         {
             console.log(err);
             alert(err);
-        });  
-
-        })
- 
+        }); 
 }
