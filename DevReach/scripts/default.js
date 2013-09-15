@@ -1307,15 +1307,14 @@ function fbLogin()
        
     var fbT;
     facebook.getAccessToken(function(token) {
-                alert("start");
+
         el.Users.loginWithFacebook(token)
 				.then(function() {
-				alert("Token" + token);
+
                      localStorage["fbToken"] = JSON.stringify(token);
 					var message = "Saved to Everlive!";
                     fbT = token;
-					navigator.notification.alert(message, function() {
-					})
+					//navigator.notification.alert(message, function() {})
 				
 			})
         .then(function () {
@@ -1364,21 +1363,6 @@ function fbPost()
 
    data.access_token = token;
     
-        
-       /* $.ajax({
-            contentType:"application/json",
-  type: "POST",
-  url: postURL,
-  data: fbmessage,
-            dataType:"json"
-}).done(function( msg ) {
-  alert( "Data Saved: " + msg );
-})
-        .error(function(err)
-        {
-            console.log(err);
-            alert(err.error);
-        });*/
         
         
  $.post(postURL,data)
