@@ -1356,15 +1356,32 @@ function fbPost()
     
     facebook.getAccessToken(function(token) {
 
-         var postURL = "https://graph.facebook.com/me/feed?access_token=" + token;
+         var postURL = "https://graph.facebook.com/me/feed";
     var data = {};
             data.message = "Post from DevReach Companion App";
         data.name = "DevReach";
     data.link = "http://www.devreach.com";
 
-    data.access_token = token;
-    alert(JSON.stringify(data));
-   /* $.post(postURL,{message:"Test Message", name:"DevReach", link:"http://www.devreach.com"})
+   data.access_token = token;
+    
+        
+       /* $.ajax({
+            contentType:"application/json",
+  type: "POST",
+  url: postURL,
+  data: fbmessage,
+            dataType:"json"
+}).done(function( msg ) {
+  alert( "Data Saved: " + msg );
+})
+        .error(function(err)
+        {
+            console.log(err);
+            alert(err.error);
+        });*/
+        
+        
+ $.post(postURL,data)
     .done(function(results) {
         alert("Status Posted");
     })
@@ -1372,8 +1389,8 @@ function fbPost()
         {
             console.log(err);
             alert(err);
-        });
+        });  
 
         })
-    */
+ 
 }
