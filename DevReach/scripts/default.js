@@ -1290,60 +1290,90 @@ var IdentityProvider = function (config) {
 
 
  var facebook = new IdentityProvider({
-        name: "Facebook",
+        name: "DevReach Companion",
         loginMethodName: "loginWithFacebook",
         endpoint: "https://www.facebook.com/dialog/oauth",
         response_type:"token",
-        client_id: "622842524411586",
+        client_id: "1378904992343802",
         redirect_uri:"https://www.facebook.com/connect/login_success.html",
         access_type:"online",
-        scope:"email",
+        scope:"email,publish_actions",
         display: "touch"
     });
 
 function fbLogin()
 {
-     app.showLoading();
-    /*var facebookConfig = {
-			name: "Facebook",
-			loginMethodName: "loginWithFacebook",
-			endpoint: "https://www.facebook.com/dialog/oauth",
-			response_type:"token",
-			client_id: "622842524411586",
-			redirect_uri:"https://www.facebook.com/connect/login_success.html",
-			access_type:"online",
-			scope:"email,publish_stream",
-			display: "touch"
-		};
-    
-		var facebook = new IdentityProvider(facebookConfig); */
-    
-    var fbToken;
-    
+     app.showLoading();  
+       
+    var fbT;
     facebook.getAccessToken(function(token) {
                 alert("start");
-				el.Users.loginWithFacebook(token)
+        el.Users.loginWithFacebook(token)
 				.then(function() {
-					fbToken = token;
-					var message = "Welcome to Everlive!";
-                    
+				alert("Token" + token);
+                     localStorage["fbToken"] = JSON.stringify(token);
+					var message = "Saved to Everlive!";
+                    fbT = token;
 					navigator.notification.alert(message, function() {
 					})
 				
 			})
         .then(function () {
-                    app.hideLoading();
-                    app.navigate('#home');
-                })
+            app.hideLoading();
+            //var fbT = localStorage.fbToken;
+            if (fbT != null) {
+                $.get("https://graph.facebook.com/me?fields=name,email&access_token=" + fbT)
+                .done(function(data) {
+                    $("#name").val(data.name);
+                    $("#email").val(data.email);  
+                    savePersonalDetailsfn();
+                });
+                alert("Details Updated");
+            }
+            else
+            {
+                alert("Token not available.");
+            }
+            //app.navigate('#home');
+        })
          .then(null, function (err) {
                     app.hideLoading();
                     if (err.code = 214) {
-                        showError("The specified identity provider is not enabled in the backend portal.");
+                        alert("The specified identity provider is not enabled in the backend portal.");
+                        alert(err.message);
                     }
                     else {
-                        showError(err.message);
+                        alert(err.message);
                     }
                 });
         })
 		
+}
+
+
+function fbPost()
+{
+    
+    facebook.getAccessToken(function(token) {
+
+         var postURL = "https://graph.facebook.com/me/feed?access_token=" + token;
+    var data = {};
+            data.message = "Post from DevReach Companion App";
+        data.name = "DevReach";
+    data.link = "http://www.devreach.com";
+
+    data.access_token = token;
+    alert(JSON.stringify(data));
+   /* $.post(postURL,{message:"Test Message", name:"DevReach", link:"http://www.devreach.com"})
+    .done(function(results) {
+        alert("Status Posted");
+    })
+        .error(function(err)
+        {
+            console.log(err);
+            alert(err);
+        });
+
+        })
+    */
 }
