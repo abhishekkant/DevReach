@@ -1081,9 +1081,9 @@ function initializeNotification() {
 
     var pushSettings = {
         iOS:{
-            badge: true,
-            sound: true,
-            alert: true
+            badge: "true",
+            sound: "true",
+            alert: "true"
         },
         android:{
             senderID: GoogleProjectID
