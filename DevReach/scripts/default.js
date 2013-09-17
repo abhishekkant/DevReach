@@ -9,7 +9,8 @@ var GoogleProjectID = '541570376695';
 var fbClientID="1378904992343802";
 var app;
 var dateData = [{"dateTitle":"Day 1", "dateValue":"10/01/2013"}, 
-    {"dateTitle":"Day 2", "dateValue":"10/02/2013"}
+    {"dateTitle":"Day 2", "dateValue":"10/02/2013"},
+{"dateTitle":"Pre-Event", "dateValue":"08/24/2013"}
 ];
 
 var speakerDetailsData;
@@ -102,7 +103,7 @@ function getSpeakers(e)
         
     }
     else {
-        console.log("In LIve section");
+        console.log("In Live section");
         speakerData = new kendo.data.DataSource(
             {
             type: "odata",
@@ -155,9 +156,8 @@ function getSpeakers(e)
 
 
 
-function getSessionsBySpeakers(e)
+function getSessionsBySpeakers()
 {
-    alert("hi hello");
     
     var speakerData;
     if (localStorage.speakers) {
@@ -428,6 +428,7 @@ function sessionTimeClick(e) {
     var selDay = selectedDate.getDate();
     var selMonth = selectedDate.getMonth() + 1;
     var selYear = selectedDate.getFullYear();
+    console.log("in time");
     
    var sessionTimeDS = new kendo.data.DataSource({
     type:"odata",
@@ -514,6 +515,7 @@ var timingData =  new kendo.data.DataSource(
 
 
 function tracksShow(){
+ 
     var trackData;
       if (localStorage.tracks) {
         trackData = new kendo.data.DataSource({
@@ -656,15 +658,6 @@ function getAllSessions() {
         allSessionData.fetch();
               
              
-      //  var template113 = kendo.template($("#sessionsTemplate").html());
-        
-      /*  $("#sessionsView").kendoMobileListView({
-            dataSource: allSessionData1,
-            template:template113,
-            style:"inset",
-            endlessScroll:true
-   
-        }); */ 
         
     }
     else
@@ -702,22 +695,7 @@ function getAllSessions() {
                             
                     });
 
-                       /* allSessionData.fetch(function(){
-                            var data = allSessionData.view().length;
-                            console.log(data);
-                            var datas =  allSessionData.data();
-                            console.log(datas);
-                            saveDataLocally1('allSessionData',datas);
-                        }) */
-        
-     /*   var template2 = kendo.template($("#sessionsTemplate").html());
-        $("#sessionsView").kendoMobileListView({
-            dataSource: allSessionData,
-            template:template2,
-            style:"inset",
-            endlessScroll:true
-               
-        });  */
+                     
         
        }
 
@@ -1228,6 +1206,24 @@ function refreshAllSessionsData()
     if (localStorage.venues)
     localStorage.removeItem("venues");
     
+}
+
+
+function getAllSessionsFromLiveData()
+{
+    tracksShow();
+    venueListClick();
+getAllSessions();
+getSessionsBySpeakers();
+
+    /* if (localStorage.allSessionData)
+    localStorage.removeItem("allSessionData");
+    if (localStorage.tracks)
+    localStorage.removeItem("tracks");
+    if (localStorage.speakers)
+    localStorage.removeItem("speakers");
+    if (localStorage.venues)
+    localStorage.removeItem("venues");*/
 }
 
 
