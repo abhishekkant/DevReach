@@ -1341,17 +1341,11 @@ function fbLogin()
 
 
 function fbPost() {
-    var fbT = localStorage.fbToken;
-    if (fbT != null) {
-        console.log("Token found on device");
-        makefbPost("Post from DevReach Companion App", "http://www.devreach.com", "DevReach", fbT);    
-    }
-    else {
+   
          console.log("Getting token from live");
         facebook.getAccessToken(function(token) {
             makefbPost("Post from DevReach Companion App", "http://www.devreach.com", "DevReach", token);      
         }); 
-    }
 }
 
 function makefbPost(FBmessage, FBLink, FBLinkName, fbToken)
