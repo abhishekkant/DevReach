@@ -157,6 +157,7 @@ function getSpeakers(e)
 
 function getSessionsBySpeakers(e)
 {
+    alert("hi hello");
     
     var speakerData;
     if (localStorage.speakers) {
@@ -211,7 +212,7 @@ function getSessionsBySpeakers(e)
         dataSource: speakerData,
         template:speakersListTemplate4Session,
         style:"inset",
-        click: "displaysessionsbyspeaker"
+        click: displaysessionsbyspeaker
                
     }); 
     
@@ -325,6 +326,8 @@ function tracksListViewClick(e) {
 }
 
 function displaysessionsbyspeaker(e) {
+    
+    alert('hello');
     var speakerId = e.dataItem.UserProfile.UserId;
     
     var sessionsOfSpeakers = new kendo.data.DataSource(
