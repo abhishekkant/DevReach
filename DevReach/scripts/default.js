@@ -326,8 +326,7 @@ function tracksListViewClick(e) {
 }
 
 function displaysessionsbyspeaker(e) {
-    
-    alert('hello');
+   
     var speakerId = e.dataItem.UserProfile.UserId;
     
     var sessionsOfSpeakers = new kendo.data.DataSource(
@@ -1211,19 +1210,14 @@ function refreshAllSessionsData()
 
 function getAllSessionsFromLiveData()
 {
+    app.showLoading();  
     tracksShow();
     venueListClick();
 getAllSessions();
 getSessionsBySpeakers();
+    
+     app.hideLoading();  
 
-    /* if (localStorage.allSessionData)
-    localStorage.removeItem("allSessionData");
-    if (localStorage.tracks)
-    localStorage.removeItem("tracks");
-    if (localStorage.speakers)
-    localStorage.removeItem("speakers");
-    if (localStorage.venues)
-    localStorage.removeItem("venues");*/
 }
 
 
