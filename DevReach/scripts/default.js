@@ -388,21 +388,21 @@ function venueListViewClick(e) {
         serverfiltering: true,
         serverPaging: true,
         pageSize: 20,
-            page: 1,
+        page: 1,
         batch: false,
         error: function() {
             console.log(arguments)
         }
     });
- //sessionsByVenueData.fetch();
+ sessionsByVenueData.fetch();
+    console.log(sessionsByVenueData);
     var template1 = kendo.template($("#filteredSessionsTemplate").text());
     var vlistview = $("#sessioninVenueList").data("kendoMobileListView");
     if(vlistview) vlistview.destroy();
     $("#sessioninVenueList").kendoMobileListView({
         dataSource: sessionsByVenueData,
         template:template1,
-        style:"inset",
-   loadMore:true
+        style:"inset",   
     });
 }
 
