@@ -645,7 +645,7 @@
 			<a href="\#sessionDetails?sid=#= Session.SessionID #">
                 <h3>#= Session.Title #</h3>
                 <p>
-                    <span>Speaker: #: UserProfile.FirstName # #:UserProfile.SecondName #</span><br/>
+                    <span>Speaker: #: UserProfile.FirstName # #:UserProfile.LastName #</span><br/>
                     <span>Duration: #= Session.SessionTimeSlot.Durationinmins# mins</span>
             
                      
@@ -690,46 +690,71 @@
         
         
 		<script type= "text/x-kendo-template" id="sessionDetailsTemplate">
+<!--        <div class="dr-box">
+            Developer Operations with Visual Studio ALM 2013
+        </div>
+        <h2>Speaker</h2>
+        <div class="dr-box dr-speaker-box">
+            <img src="styles/images/speakers/matteo-emili.png" alt="Matteo Emili" />
+            Matteo <span>Emili</span>
+        </div>
+
+        <div class="dr-box dr-box-listview">
+           <ul data-role="listview">
+               <li>Start: October 1 2013 10:30 AM</li>
+               <li>End: October 1 2013 11:45 AM</li>
+               <li>Duration: 90 Minutes</li>
+               <li>Location: Gama Hall</li>
+           </ul>
+       </div>
+        
+        <h2>Description</h2>
+        <div class="dr-box">
+            <p>Once a software is released, the Engineering team is not going to have a rest. The Application Maintenance starts, which is often harder to manage than the Product Development, for various reasons like lack of communication between the Engineering and the Systems Administration team, missing information, etc. </p>
+            <p>In this session we are going to cover how to monitor, gather information, react and fix a production issue with Visual Studio ALM 2013 and its integration with System Center.</p>
+        </div>        -->
             
-            <div>
-			<div id="sessionTitle">#= Session.Title #</div> 
+            
+        <div>
+    	    <h1 id="sessionTitle" class="dr-box">#= Session.Title #</h1>
+            <h2>Speaker</h2>
               
-                <div id="sessionSName">
-                    Presented by : #= UserProfile.FirstName# #UserProfile.LastName# 
-                    #for (var i = 0;i < UserProfile.UserURLs.results.length;i++) {
-                        if (UserProfile.UserURLs.results[i].SNTypeID===1) {#
-                            <img class="pullImage" alt="#= UserProfile.FirstName#
-                            " src= #=UserProfile.UserURLs.results[i].URL#
-                                 /> <br/>
-                        #}
-                        else {#
-                        # }
-                    }#
-                </div>
+            <div id="sessionSName" class="dr-box dr-speaker-box">
+                #for (var i = 0;i < UserProfile.UserURLs.results.length;i++) {
+                    if (UserProfile.UserURLs.results[i].SNTypeID===1) {#
+                        <img class="pullImage" alt="#= UserProfile.FirstName#" src= #=UserProfile.UserURLs.results[i].URL# />
+                    #}
+                    else {#
+                    # }
+                }#
+                #= UserProfile.FirstName# <strong>#UserProfile.LastName#</strong>
                 
-               <a href="\#reviewSessionView?sid=#= Session.SessionID#" data-role="button" data-align="right" style="background-blue: green;margin-left:0.5cm;" >Review Session</a>
+            </div>                
             	
-            <br/> 
-			<div id="sessionSSName">
-             <u>Timing details</u>
-			<ul>
-			<li>
-			Start : #= kendo.toString(new Date(new Date(parseInt(Session.SessionTimeSlot.FromTime.replace("/Date(", "").replace(")/",""), 10)-19800000)),"g")#
-			</li>
-			<li>
-			End   : #= kendo.toString(new Date(new Date(parseInt(Session.SessionTimeSlot.ToTime.replace("/Date(", "").replace(")/",""), 10)-19800000)),"g")#
-			</li>
-			<li>
-			Duration : #= Session.SessionTimeSlot.Durationinmins# Mins
-			</li>
-			</ul>
+            <h2>Details</h2>
+			<div id="sessionSSName" class="dr-box dr-box-listview">
+    			<ul data-role="listview">
+        			<li>
+        			Start : #= kendo.toString(new Date(new Date(parseInt(Session.SessionTimeSlot.FromTime.replace("/Date(", "").replace(")/",""), 10)-19800000)),"g")#
+        			</li>
+        			<li>
+        			End   : #= kendo.toString(new Date(new Date(parseInt(Session.SessionTimeSlot.ToTime.replace("/Date(", "").replace(")/",""), 10)-19800000)),"g")#
+        			</li>
+        			<li>
+        			Duration : #= Session.SessionTimeSlot.Durationinmins# Mins
+        			</li>
+    			</ul>
 			</div>
           
-            <div id="sessionAbstract">
+            <h2>Description</h2>
+            <div id="sessionAbstract" class="dr-box">
                 #= Session.Description #
             </div>
+            <a href="\#reviewSessionView?sid=#= Session.SessionID#" data-role="button">Review Session</a>
+            <br>
+            <br>
 			
-            </div>
+        </div>
 
 		</script>
         <script src="cordova.js"></script>

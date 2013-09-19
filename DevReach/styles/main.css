@@ -16,6 +16,14 @@
     font-family: Arial, Helvetica, sans-serif;
 }
 
+.km-root *:not(.km-tabstrip):not(.km-buttongroup)>.km-button,
+.km-root .km-button
+{
+    margin: 0 auto;
+    display: block;
+    width: 70%;
+    background: #f05a22;
+}
 
 /* Menu List */
 .km-root .menu-list .km-listview li
@@ -243,7 +251,7 @@ div.km-content.km-insetcontent
     margin: 0 0 0.5em 0.2em;
 }
 
-.dr-box
+.km-root .dr-box
 {
     font-size: 0.9em;
     line-height: 1.5em;
@@ -260,7 +268,7 @@ div.km-content.km-insetcontent
     margin: 0 0 1em;
  }
 
-.dr-box-listview
+.km-root .dr-box-listview
 {
     padding: 0;
 }
@@ -271,9 +279,13 @@ div.km-content.km-insetcontent
     background-color: transparent;
 }
 
-.dr-speaker-box
+.dr-speaker-box:after
 {
-    overflow: hidden;
+	content: "";
+	display: block;
+	clear: both;
+	visibility: hidden;
+	height: 0;
 }
 
 .dr-speaker-box img
@@ -282,9 +294,11 @@ div.km-content.km-insetcontent
     margin-right: 1em;
 }
 
-.dr-speaker-box span
+.dr-speaker-box strong
 {
     display: block;
     font-size: 1.35em;
 }
+
+
 
