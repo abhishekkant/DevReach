@@ -1,280 +1,290 @@
-.km-navbar {
-	background-color: #c7bd8f !important;
-}
+/* Font Icons */
+.km-clock:after,.km-clock:before{content:"\E08D"}
+.km-grid:after,.km-grid:before{content:"\E0AB"}
+.km-info:after,.km-info:before{content:"\E0F9";}
+.km-comment:after,.km-comment:before{content:"\E091";}
+.km-certificate:after,.km-comment:before{content:"\E08C";}
+.km-place:after,.km-place:before{content:"\E0B4"}
+.km-calendar:after,.km-calendar:before{content:"\E089"}
 
-.km-ios .km-navbar .km-button
+
+
+/* Global */
+.wrapper
 {
-    background-color: #886c5a;
+    background: #e6e7e8 no-repeat 50% 0;
+    font-family: Arial, Helvetica, sans-serif;
 }
 
-.km-ios .km-navbar, .km-ios .km-content .km-button {
-	background-color: #8a7c5e;
+
+/* Menu List */
+.km-root .menu-list .km-listview li
+{
+    border-radius: 0;
+    text-transform: uppercase;
+    padding: 0;
+    border: 0 none;
+    border-bottom: 1px solid #fff;
+    background-color: #0b9446;
 }
 
-.km-ios .km-content .km-button {
-	border: none;
+.menu-list li,
+.km-root .menu-list li .km-icon,
+.menu-list .km-listview-link:after
+{
+    color: #fff;
 }
 
-.km-listview .km-list {
+.km-root .menu-list li .km-icon
+{
+    vertical-align: -0.2em;
+    font-size: 1.4em;
+    width: 1.2em
+}
+
+.km-root .menu-list .km-listview li a
+{
+    font-size: 0.7em;
+    font-weight: normal;
+    padding: 0.5em 1em 0;
     margin: 0;
 }
 
-.km-root .km-listview .km-group-title, .km-android .km-root .km-listview .km-group-title {
-	padding: 0;
-	border-top: 0;
-	box-shadow: none;
-    background-color: #886c5a;
-    font-weight: normal;
-	font-size: 1.1em;
-    color: #fff;
-}
-
-.km-root .km-group-title h2 {
-	margin: 0;
-	padding-top: .3em;
-	padding-bottom: .2em;
-	color: #fff;
-	text-shadow: none;
-}
-
-.km-ios .km-group-title h2, .km-android .km-group-title h2{
-	background-color: #886c5a;
-	font-weight: normal;
-	font-size: 1em;
-}
-
-.km-ios .km-listview .km-list, 
-.km-android #speakersTemplate .km-content,
-.km-android #speakersbySessionTemplate .km-content,
-.km-android #speakerDetailsTemplate .km-content,
-.km-android #sessionsTemplate .km-content,
-.km-android #filteredSessionsTemplate .km-content
-
+.menu-list li.km-state-active .km-listview-link
 {
-	background-image: url(../dicons/pattern8.png);
+    background: rgba(0,0,0,0.3);
+    border-radius: 0 !important;
 }
 
-.km-android .km-listview .km-listview-link {
-    color: #2e2e2e;
-}
-
-.km-ios .km-scroll-header .km-group-title, .km-android .km-scroll-header .km-group-title {
-	margin: 0;
-	border-bottom: 0;
-	background: #886c5a;
-}
-
-.km-android .km-listview {
-	margin: 0;
-}
-
-#tweetView .km-list > li, #twitter .km-root .km-listview-link {
-	padding: 0;   
-}
-.speakersTemplate
+.menu-list .km-listview li
 {
-    padding: .5em .7em;
-    font-size: .8em;
-    line-height: 1.4em;
-    background-image: url(../dicons/pattern8.png);
-}
-.tweets {
-    padding: .5em .7em;
-    font-size: .8em;
-    line-height: 1.4em;
-    background-image: url(../dicons/pattern8.png);
-}
-.pullImage {
-	width: 64px;
-    height: 64px;
-    border-radius: 3px;
-    float: left;
-    margin-right: 10px;
+    height: 2em;
 }
 
-.sublink {
-	font-size: .9em;
-    font-weight: normal;
-    display: inline-block;
-    padding: 3px 3px 0 0;
-    text-decoration: none;
-    opacity: .8;
-}
-.listsbg .km-content
+
+
+/* Default Kendo styles Resets*/
+div.km-content.km-insetcontent
 {
-   
-    background-image: url(../dicons/pattern8.png); 
-   
+    background: none;
 }
-.listsbgs .km-content
+
+.km-header .km-view-title
 {
-   background-image: url(../dicons/pattern8.png); 
-   color: black;
+    box-shadow: none;
+    -webkit-box-shadow: none;
 }
-.detaildiv 
+
+
+/* Title Bar */
+.km-header .km-navbar
 {
-     background-image: url(../dicons/pattern8.png);
+    background: #414042;
+    height: 28px;
+    font-size: 12px;
 }
-.km-android .km-list > li, .km-android .km-list a:not(.km-button) {
-	color: black;
+
+.km-header .km-view-title
+{
+    font-size: 1em;
 }
-#home-header
+
+.km-info
 {    
-	margin-top:40pt;
-    margin-bottom: 24pt;
-	height: 48px;
-    background-image: url('../Images876/DevReachLogo48.png');
-	background-size: auto 100%;
-	background-repeat: no-repeat;
-	background-position: center center;
+     
 }
 
-#home-content
+.km-root .km-back
 {
-    padding-left: 8pt;
-    padding-right: 8pt;
-	background-image: url('../dicons/pattern8.png');
-	background-size: auto 100%;
-	background-repeat: no-repeat;
-	background-position: center center;
-}
-#home-contents
-{
-    padding-left: 8pt;    
-    padding-right: 8pt;
-	background-image: url('../dicons/pattern8.png');
-	background-size: auto 100%;
-	background-repeat: no-repeat;
-	background-position: center center;
-}
-#tile-list {
-    text-align: center;    
+    padding-left: 1em;
+    -webkit-mask-image: none;    
 }
 
-#tile-list > div
+.km-root .km-back:after
 {
-	z-index: 1000;
-	display: inline-block;
-	text-align: center;
-	margin: 2pt;
-	margin-bottom: 6pt;
-	height: 112px;
-	width: 90px;
-    background-color: #886c5a;
+    background: none;
 }
 
-#tile-list > div > a {
-    text-decoration: none;
+/* End Title Bar */
+
+
+.km-header *:not(.km-tabstrip):not(.km-buttongroup) .km-button
+{
+    background: none;
+    border: 0;
+    box-shadow: none;
+    -webkit-box-shadow: none;
+    margin: 0;
+    font-size: 14px;
+}
+
+
+
+/* Main Menu */
+.km-root .km-tabstrip .km-icon
+{
     color: #fff;
-}
-.tile-image {
-    height: 80px;
-    width: 80px;
-}
-
-#tile-list {
-    text-align: center;    
+    font-size: 2.5em;
+    padding: 7px 0 3px 10px;
+    height: 25px;
 }
 
-
-
-#tile-lists > div
+.km-root .km-tabstrip .km-state-active .km-icon,
+.km-root .km-tabstrip .km-button:active,
+.km-root .km-tabstrip .km-state-active
 {
-
-	display: inline-block;    
-	text-align: center;
-    margin-top: 20pt;
-    margin-left:14pt;
-	height: 112px;
-	width: 120px;
-    background-color: #886c5a  ;
+    color: #fff300;
 }
 
 
+/* Welcome Screen */
 
-
-#tile-lists > div > a {
-    text-decoration: none;
-    text-align:left;
-    color: #fff;
-}
-
-.tile-images {
-    height: 80px;
-    width: 80px;
-}
-
-.listTime
+#home
 {
-	font-size: .8em;
-	font-weight: 100;
+    background-image: url(images/home-bgr.png);
 }
 
-.listSpeakerDetail
+
+#home-content li
 {
-	font-size: .100em;
-	font-weight: 100;
+    background-color: #2bb673;
+ }
+
+#home-content li[data-icon="grid"]
+{
+    background-color: #0b9446;
 }
-.sponsorThumbnail
+
+#home-content li[data-icon="contacts"]
 {
-    vertical-align: middle;    
+    background-color: #27aae1;
+}
+
+#home-content li[data-icon="comment"]
+{
+    background-color: #ab218e;
+}
+
+#home-content li[data-icon="certificate"]
+{
+    background-color: #ee4036;
+}
+#logo
+{
+    background: #fff300 url(images/dr-logo.png) no-repeat 50% 14px;
+    height: 63px;
+    margin-top: 53px
+}
+
+/* My Agenda View */
+.km-root .fullscreen-list .km-listview,
+.km-ios .fullscreen-list .km-listinset>li
+{
+    margin: 0;
+    border-radius: 0 !important; 
+}
+
+.fullscreen-list .km-list li
+{
+    font-size: 0.9em;
+    padding: 0;
+    background-color: transparent;
+    color: #000;
+}
+
+.fullscreen-list .km-list li a
+{
+    padding: 1.5em 1em 0.5em;
+    margin: 0;
+}
+
+.fullscreen-list h3
+{
+    font-size: 1em;
+    color: #2bb673;
+    margin: 0 0 0.5em;
+}
+
+.fullscreen-list p
+{
+    margin: 0;
+    line-height: 0.95em;
+}
+
+.fullscreen-list span
+{
+    font-size: 0.8em;    
+}
+
+.fullscreen-list .item-date
+{
+    text-align: right;
     display: inline-block;
-    margin-top:5pt;
-	margin-left: 25pt;
-	margin-right: 6pt;
-    margin-bottom:10pt;
-    height: 150px;
-	width: 150px;
-    border-radius: 6px;
-	border-style: solid;
-	border-color: #999;
-	border-width: 1px;
-	background-size: 100% auto;
-	background-repeat: no-repeat;
-	background-position: center center;
-    background-color: white;
+    width: 100%;
 }
-#sessionTitle
+
+.km-root .fullscreen-list .km-state-active .km-listview-link
 {
-    margin-top: 15pt;
-	margin-bottom: 6pt;
-	font-size: 2.0em;
+    background: #fff300;
+    color: #000;
 }
-#sessionSName
+
+
+/* Sessions View */
+
+#sessionDetails .km-content
 {
-    margin-top: 5pt;
-	margin-bottom: 6pt;
-	font-size: 1.1em;
+    padding: 1em 1em;
 }
-#sessionSSName
+
+#sessionDetails h2 
 {
-    
-    margin-top: 40pt;
-    margin-left: 10pt;
-	font-size: 0.9em;
-    font-weight: 100;
-    line-height: 150%;
+    font-size: 1.2em;
+    margin: 0 0 0.5em 0.2em;
 }
-#sessionAbstract
+
+.dr-box
 {
-	position: relative;
-	margin-top: 36pt;
-	margin: 6pt;
-	font-size: 1.1em;
-	font-weight: 100;
-	line-height: 150%;
+    font-size: 0.9em;
+    line-height: 1.5em;
+    font-weight: bold;
+    margin: 0 0 1.2em;
+    border: 1px solid #cdcdcd;
+    background: #fcfcfc;
+    color: #2bb673;
+    padding: 1.1em 1em;
 }
-#sessionRName
+
+.dr-box p
 {
-    margin-top: 20pt;
-    margin-left:15pt;	
-	font-size: 1.5em;
+    margin: 0 0 1em;
+ }
+
+.dr-box-listview
+{
+    padding: 0;
 }
-#txtReview {
-    margin-top:5pt;
-    margin-left:15pt;
-	border: 2px dashed #D1C7AC;
-	width: 260px;
-    font-size: 1.7em;
-	font-weight: 100;
+
+.dr-box-listview .km-list>li
+{
+    font-size: 1em;
+    background-color: transparent;
 }
+
+.dr-speaker-box
+{
+    overflow: hidden;
+}
+
+.dr-speaker-box img
+{
+    float: left;
+    margin-right: 1em;
+}
+
+.dr-speaker-box span
+{
+    display: block;
+    font-size: 1.35em;
+}
+
