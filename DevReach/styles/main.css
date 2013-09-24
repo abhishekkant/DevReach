@@ -6,6 +6,8 @@
 .km-certificate:after,.km-comment:before{content:"\E08C";}
 .km-place:after,.km-place:before{content:"\E0B4"}
 .km-calendar:after,.km-calendar:before{content:"\E089"}
+.km-gear:after,.km-gear:before{content:"\E0A4"}
+.km-question:after,.km-question:before{content:"\E0FB"}
 
 
 
@@ -240,12 +242,12 @@ div.km-content.km-insetcontent
 
 /* Sessions View */
 
-#sessionDetails .km-content
+.dr-box-wrapper
 {
     padding: 1em 1em;
 }
 
-#sessionDetails h2 
+.dr-box-wrapper h2 
 {
     font-size: 1.2em;
     margin: 0 0 0.5em 0.2em;
@@ -300,5 +302,81 @@ div.km-content.km-insetcontent
     font-size: 1.35em;
 }
 
+.dr-box-form label
+{
+    width: 82px;
+    display: inline-block;
+    background-color: #f4f4f4;
+    height: 31px;
+    vertical-align: middle;
+    color: #414042;
+    line-height: 31px;
+    padding-left: 10px;
+    font-weight: bold;
+}    
 
+.dr-box-form input
+{
+    vertical-align: middle;
+    color: #2bb673;
+    border: 0 none;
+    height: 29px;
+}    
 
+.dr-box-form li
+{
+    padding: 0;
+}
+
+.dr-box-form .km-switch-container
+{
+    background: #2bb673;
+}
+
+.dr-box-form .km-switch-label-on
+{
+    text-indent: 10px;
+    font-weight: normal;
+}
+
+.dr-box-form .km-switch-label-off
+{
+    font-weight: normal;
+    font-size: 0.9em;
+    color: #ffffff;
+    line-height: 1.7em;
+    text-indent: -4px;
+}
+
+.dr-box-form .km-switch-off .km-switch-container
+{
+    background: #cdcdcd;
+}
+
+.dr-box-form .km-switch-handle,
+.dr-box-form .km-switch-wrapper,
+.dr-box-form .km-switch-container
+{
+    -webkit-border-radius: 0;
+    border-radius: 0;
+    box-shadow: 0 0;
+}
+
+.dr-box-form .km-switch
+{
+    width: 4rem;
+}
+
+.dr-box-form .km-switch-handle
+{
+    margin: 0px 0px 1px 0;
+    background: white;
+    border: 0 none;
+    padding-top: 1px;
+}
+
+.dr-box-form .km-switch-label-on .km-switch-handle
+{
+    position: relative;
+    left: -4px;
+}
