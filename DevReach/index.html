@@ -36,10 +36,10 @@
                     <a data-role="button" href="#meView" data-align="right" data-icon="info"></a>
                     <span data-role="view-title"></span>
                 </div>
-                <h1 id="logo"></h1>
             </header>
 
             <div data-role="content" id="home-content">
+                <h1 id="logo"></h1>
                 <div id="home-content" class="menu-list">
                     <ul data-role="listview" data-style="inset">
                         <li data-icon="clock">
@@ -50,9 +50,6 @@
                         </li>
                         <li data-icon="contacts">
                             <a href="#speakers">Speakers</a>
-                        </li>
-                        <li data-icon="favorites">
-                            <a href="#meView">Resources</a>
                         </li>
                         <li data-icon="comment">
                             <a href="#" id="notificationSubscriptionLink" onclick="subscribeForNotifications(); return false;">Notifications</a>
@@ -65,11 +62,11 @@
             </div>
             <div data-role="footer">
                 <div data-role="tabstrip">
-                    <a href="#home" data-icon="home">Home</a>
-                    <!--<a href="#tweetView" data-icon="share">Tweets</a>-->
-                    <a href="#sessions" data-icon="action">Sessions</a>
-                    <a href="#speakers" data-icon="contacts">Speakers</a>
-                    <a href="#meView" data-icon="favorites">Me</a>
+    				<a href="#home" data-icon="home">Home</a>
+    				<a href="#myagenda" data-icon="clock">My Agenda</a>
+    				<a href="#sessions" data-icon="grid">Sessions</a>
+    				<a href="#speakers" data-icon="contacts">Speakers</a>
+    				<a href="#tweetView" data-icon="comment">Notification</a>
                 </div>
             </div>
         </div>
@@ -87,11 +84,11 @@
 
             <div data-role="footer">
                 <div data-role="tabstrip">
-                    <a href="#home" data-icon="home">Home</a>
-                    <!--<a href="#tweetView" data-icon="share">Tweets</a>-->
-                    <a href="#sessions" data-icon="action">Sessions</a>
-                    <a href="#speakers" data-icon="contacts">Speakers</a>
-                    <a href="#meView" data-icon="favorites">Me</a>
+    				<a href="#home" data-icon="home">Home</a>
+    				<a href="#myagenda" data-icon="clock">My Agenda</a>
+    				<a href="#sessions" data-icon="grid">Sessions</a>
+    				<a href="#speakers" data-icon="contacts">Speakers</a>
+    				<a href="#tweetView" data-icon="comment">Notification</a>
                 </div>
             </div>
         </div>
@@ -117,11 +114,11 @@
 
             <div data-role="footer">
                 <div data-role="tabstrip">
-                    <a href="#home" data-icon="home">Home</a>
-                    <!--	<a href="#tweetView" data-icon="share">Tweets</a>-->
-                    <a href="#sessions" data-icon="action">Sessions</a>
-                    <a href="#speakers" data-icon="contacts">Speakers</a>
-                    <a href="#meView" data-icon="favorites">Me</a>
+				<a href="#home" data-icon="home">Home</a>
+				<a href="#myagenda" data-icon="clock">My Agenda</a>
+				<a href="#sessions" data-icon="grid">Sessions</a>
+				<a href="#speakers" data-icon="contacts">Speakers</a>
+				<a href="#tweetView" data-icon="comment">Notification</a>
                 </div>
             </div>
         </div>
@@ -154,7 +151,7 @@
         <!-- This view will help to browse session by speaker -->
 
         <div data-role="view" id="sessionbyspeaker" data-title="Speakers" data-show="getSessionsBySpeakers" class="listsbg">
-            <div>
+            <div class="menu-list">
                 <ul id="speakersViewforSession">
                 </ul>
             </div>
@@ -172,7 +169,7 @@
                 <span class="item-date">#: date #</span>
             </a>
         </script>
-        <div data-role="view" id="myagenda" data-title="Agenda" data-layout="app-layout" data-show="showMe">
+        <div data-role="view" id="myagenda" data-title="Agenda" data-layout="mobile-tabstrip" data-show="showMe">
     		<div class="fullscreen-list">
     			<ul id="myAgendaSessionView" data-role="listview" data-source="agendaData" data-temaplate="agenda-template">
     			</ul>
@@ -423,6 +420,12 @@
                             <label for="name">Anonymous</label>
                             <input type="checkbox" id="isAnonymous" data-role="switch" />
                         </li>
+                        <li>
+                            <label for="name">Notifications</label>
+                            <input type="checkbox" id="notifications" data-role="switch" />
+                        </li>
+                        
+                         
                     </ul>
                 </div>
 
@@ -495,21 +498,20 @@
 
         <!-- This view will show all tracks for the event. Clicking on any track will show sessions in that track. -->
         <div data-role="view" id="tracksession" data-title="Tracks" class="listsbg" data-show="tracksShow">
+            <div class="menu-list">
+                <ul id="trackList">
 
-            <ul id="trackList"
-                >
-
-            </ul>
-
+                </ul>
+            </div>
         </div>
 
         <!-- This view will show all venues for the event. Clicking on any venue will show sessions in that venue. -->
         <div data-role="view" id="venuesession" data-title="Venue" class="listsbg" data-show="venueListClick">
+            <div data-role="content" class="menu-list">
+                <ul id="venueList" data-role="listview" data-style="inset">
 
-            <ul id="venueList">
-
-            </ul>
-
+                </ul>
+            </div>
         </div>
 
         <!-- This view shows the speaker profile information. -->
@@ -525,8 +527,10 @@
 
         <div data-role="view" id="sessionsinTrack" data-title="Tracks" class="listsbg" >
 
-            <ul id="sessioninTrackList">
+            <div class="fullscreen-list">
+                <ul id="sessioninTrackList">
             </ul>
+            </div>
 
         </div>
 
@@ -534,18 +538,22 @@
 
         <div data-role="view" id="sessionsAtVenue" data-title="Venue" class="listsbg" >
 
-            <ul id="sessioninVenueList">
+            <div class="fullscreen-list">
+                <ul id="sessioninVenueList">
 
-            </ul>
+                </ul>
+            </div>
         </div>
 
         <!-- This view shows the sessions of a speaker -->
 
         <div data-role="view" id="sessionsOfSpeaker" data-title="Speakers" class="listsbg" >
 
-            <ul id="sessionsOfSpeakerList">
+            <div class="fullscreen-list">
+                <ul id="sessionsOfSpeakerList">
 
-            </ul>
+                </ul>
+            </div>
         </div>
 
         <!-- Sessions filtered on time -->
@@ -684,13 +692,13 @@
             
         <script type= "text/x-kendo-template" id="filteredSessionsTemplate">  
         
-            <a href="\#sessionDetails?sid=#= Session.SessionID#">#= Session.Title # <br/>
-        
-                <span class="listTime">
-            
+            <a href="\#sessionDetails?sid=#= Session.SessionID#">
+                <h3>#= Session.Title # </h3>
+                <p>
                     #var a = parseInt(Session.SessionTimeSlot.FromTime.replace("/Date(", "").replace(")/", ""), 10) - 19800000 #
                     #=  kendo.toString(new Date(a), "g")#    (#= Session.SessionTimeSlot.Durationinmins# mins)
-                </span> </a>
+                </p>
+            </a>
         </script>
                     
         <script type= "text/x-kendo-template" id="venueTemplate">
