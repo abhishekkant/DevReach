@@ -8,11 +8,23 @@
 .km-calendar:after,.km-calendar:before{content:"\E089"}
 .km-gear:after,.km-gear:before{content:"\E0A4"}
 .km-question:after,.km-question:before{content:"\E0FB"}
+.jquery-ratings-star:after{content:"\E048"}
+.jquery-ratings-full:after{content:"\E047"}
+
+
 
 
 
 /* Global */
-.wrapper
+.wrapper,
+.km-android,
+.km-android .km-content
+{
+    background: #e6e7e8 no-repeat 50% 0;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+.km-app
 {
     background: #e6e7e8 no-repeat 50% 0;
     font-family: Arial, Helvetica, sans-serif;
@@ -24,8 +36,29 @@
     margin: 0 auto;
     display: block;
     width: 70%;
+    height: 2.4em;
+    line-height: 2.4em;
     background: #f05a22;
+    box-shadow: 0 0;
+    border: 0 none;
+    padding: 0;
+    border-radius: 3px;
+    text-align: center;
 }
+
+.km-root h2,
+.km-root h3
+{
+    font: bold 1.05em Arial, Helvetica, sans-serif;
+    color: #414042;
+    margin: 0 0 0.5em 0.2em;
+}
+
+.km-root .km-list>li
+{
+    border-bottom: 1px solid rgba(0,0,0,0.1);
+}
+
 
 /* Menu List */
 .km-root .menu-list .km-listview li
@@ -126,6 +159,7 @@ div.km-content.km-insetcontent
     -webkit-box-shadow: none;
     margin: 0;
     font-size: 14px;
+    width: auto;
 }
 
 
@@ -134,9 +168,9 @@ div.km-content.km-insetcontent
 .km-root .km-tabstrip .km-icon
 {
     color: #fff;
-    font-size: 2.5em;
-    padding: 7px 0 3px 10px;
-    height: 25px;
+    font-size: 2em;
+    padding: 0px 0 0px 11px;
+    height: 20px;
 }
 
 .km-root .km-tabstrip .km-state-active .km-icon,
@@ -226,9 +260,7 @@ div.km-content.km-insetcontent
 
 .fullscreen-list h3
 {
-    font-size: 1em;
     color: #2bb673;
-    margin: 0 0 0.5em;
 }
 
 .fullscreen-list p
@@ -261,12 +293,6 @@ div.km-content.km-insetcontent
 .dr-box-wrapper
 {
     padding: 1em 1em;
-}
-
-.dr-box-wrapper h2 
-{
-    font-size: 1.2em;
-    margin: 0 0 0.5em 0.2em;
 }
 
 .km-root .dr-box
@@ -318,17 +344,22 @@ div.km-content.km-insetcontent
     font-size: 1.35em;
 }
 
-.dr-box-form label
+.dr-box-form label,
+#settingsView label
 {
     width: 82px;
     display: inline-block;
-    background-color: #f4f4f4;
     height: 31px;
     vertical-align: middle;
     color: #414042;
     line-height: 31px;
     padding-left: 10px;
     font-weight: bold;
+}    
+
+.dr-box-form label
+{
+    background-color: #f4f4f4;
 }    
 
 .dr-box-form input
@@ -344,18 +375,18 @@ div.km-content.km-insetcontent
     padding: 0;
 }
 
-.dr-box-form .km-switch-container
+.km-root .km-switch-container
 {
     background: #2bb673;
 }
 
-.dr-box-form .km-switch-label-on
+.km-root .km-switch-label-on
 {
     text-indent: 10px;
     font-weight: normal;
 }
 
-.dr-box-form .km-switch-label-off
+.km-root .km-switch-label-off
 {
     font-weight: normal;
     font-size: 0.9em;
@@ -364,26 +395,26 @@ div.km-content.km-insetcontent
     text-indent: -4px;
 }
 
-.dr-box-form .km-switch-off .km-switch-container
+.km-root .km-switch-off .km-switch-container
 {
     background: #cdcdcd;
 }
 
-.dr-box-form .km-switch-handle,
-.dr-box-form .km-switch-wrapper,
-.dr-box-form .km-switch-container
+.km-root .km-switch-handle,
+.km-root .km-switch-wrapper,
+.km-root .km-switch-container
 {
     -webkit-border-radius: 0;
     border-radius: 0;
     box-shadow: 0 0;
 }
 
-.dr-box-form .km-switch
+.km-root .km-switch
 {
     width: 4rem;
 }
 
-.dr-box-form .km-switch-handle
+.km-root .km-switch-handle
 {
     margin: 0px 0px 1px 0;
     background: white;
@@ -391,11 +422,110 @@ div.km-content.km-insetcontent
     padding-top: 1px;
 }
 
-.dr-box-form .km-switch-label-on .km-switch-handle
+.km-root .km-switch-label-on .km-switch-handle
 {
     position: relative;
     left: -4px;
 }
+
+#newsBox,
+#maintenanceBox
+{
+    margin-bottom: 0.4em;
+}
+
+#newsBox label,
+#maintenanceBox label
+{
+    background: none;
+}
+
+#maintenanceBox .km-button
+{
+    width: 8em;
+    height: 1.9em;
+    line-height: 1.9em;
+    margin: 0;
+    display: inline-block;
+    float: right;
+    margin: 0.4em;
+}
+
+p.info
+{
+    font-size: 0.8em;
+    font-weight: normal;
+    margin: 0 0 2em;
+}
+
+
+/* Session Review */
+#reviewSessionView .km-scroll-container
+{
+    padding: 1em;
+}
+
+#reviewSessionView h3
+{
+    margin: 0 0 0.7em 0.1em;
+}
+
+#ratingSpeaker,
+#ratingSession
+{
+    margin: 0 0 2.0em;
+    height: 38px;
+}
+
+#txtReview
+{
+    width: 100%;
+    resize: none;
+    margin-bottom: 1em;
+    padding: 0.5em;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+}
+
+#savePersonalDetails
+{
+    margin-bottom: 1em;
+}
+
+.jquery-ratings-star
+{
+    color: #2bb673;
+    width: 36px;
+    height: 36px;
+    position: relative;
+    float: left;
+    margin-right: 2px;
+    font: 2.5em/1em "Kendo UI";
+}
+
+.jquery-ratings-full
+ {
+  
+}
+
+/* Sponsors */
+#sponsorsPage ul
+{
+    padding: 0;
+    width: 100%;
+}
+
+#sponsorsPage li
+{
+    text-align: center;
+}
+
+#Sponsor li
+{
+    padding-bottom: 2em;
+}
+
 
 /* Android */
 .km-android .km-navbar [class*=item] .km-button
@@ -407,4 +537,21 @@ div.km-content.km-insetcontent
 {
     visibility: visible;
 }
+
+.km-android .km-navbar [class*=item] .km-button
+{
+    padding: 0;
+}
+
+.km-android .km-listview-wrapper
+{
+    padding: 0;   
+}
+
+
+.km-android .km-listview-wrapper
+{
+    padding: 0;
+}
+
 
