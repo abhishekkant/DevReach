@@ -44,6 +44,13 @@
     padding: 0;
     border-radius: 3px;
     text-align: center;
+    overflow: hidden;
+}
+
+.km-root *:not(.km-tabstrip) .km-content .km-button.km-state-active,
+.km-root .km-button.km-state-active
+{
+    background: #a83f18;
 }
 
 .km-root h2,
@@ -169,7 +176,7 @@ div.km-content.km-insetcontent
 {
     color: #fff;
     font-size: 2em;
-    padding: 0px 0 0px 11px;
+    padding: 0px 0 0px 12px;
     height: 20px;
 }
 
@@ -180,9 +187,11 @@ div.km-content.km-insetcontent
     color: #fff300;
 }
 
-.km-root .km-tabstrip .km-button
+.km-root .km-tabstrip .km-button,
+.km-root .km-tabstrip .km-button:active
 {
     background: #414042;
+    box-shadow: 0 0 ;
 }
 
 .km-root .km-button
@@ -192,9 +201,14 @@ div.km-content.km-insetcontent
 
 .km-root .km-tabstrip .km-button:active,
 .km-root .km-tabstrip .km-state-active
+.km-ios6 .km-tabstrip .km-button:active,
+.km-ios6 .km-tabstrip .km-state-active,
+.km-ios6 .km-tabstrip .km-state-active:last-child,
+.km-ios6 .km-tabstrip .km-button:active:last-child
 {
     box-shadow: 0 0 0 rgba(255,255,255,.4);
     -webkit-box-shadow: 0 0 0px rgba(255,255,255,.4);
+    background: #414042;
 }
 
 /* Welcome Screen */
@@ -317,6 +331,11 @@ div.km-content.km-insetcontent
     padding: 0;
 }
 
+.km-root .km-list
+{
+    margin-bottom: 0;   
+}
+
 .dr-box-listview .km-list>li
 {
     font-size: 1em;
@@ -380,7 +399,7 @@ div.km-content.km-insetcontent
     background: #2bb673;
 }
 
-.km-root .km-switch-label-on
+.km-ios .km-switch-label-on
 {
     text-indent: 10px;
     font-weight: normal;
@@ -456,6 +475,7 @@ p.info
     font-size: 0.8em;
     font-weight: normal;
     margin: 0 0 2em;
+    color: #414042;
 }
 
 
@@ -486,6 +506,9 @@ p.info
     -webkit-box-sizing: border-box;
     -moz-box-sizing: border-box;
     box-sizing: border-box;
+    border: 1px solid #cdcdcd;
+    background: #fcfcfc;
+    color: #414042;
 }
 
 #savePersonalDetails
@@ -505,7 +528,7 @@ p.info
 }
 
 .jquery-ratings-full
- {
+{
   
 }
 
@@ -528,6 +551,11 @@ p.info
 
 
 /* Android */
+.km-android .km-back
+{
+    display: none !important;
+}
+
 .km-android .km-navbar [class*=item] .km-button
 {
     padding: 0.35rem 0;
@@ -554,4 +582,46 @@ p.info
     padding: 0;
 }
 
+.km-android .menu-list ul
+{
+    margin: 1em;
+}
 
+.km-android .menu-list .km-listview li a
+{
+    padding-top: 0.1em;
+}
+
+.km-android .km-switch-handle
+{
+    width: 1.8em;
+}
+
+.km-android .km-listview .km-switch
+{
+    height: 1.7em;
+    margin-top: -0.85em;
+}
+
+.km-android .fullscreen-list .km-listview
+{
+    margin: 0;
+}
+
+.km-android .km-switch-label-on
+{
+    background: white;
+    color: #2bb673;
+}
+
+.km-android .km-switch-label-off
+{
+    color: #cdcdcd;
+    font-size: 0.8rem;
+}
+
+/* Tablets */
+.km-tablet body
+{
+    font-size: 1.5em;
+}

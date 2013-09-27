@@ -102,6 +102,7 @@
                 <div data-role="navbar">
                     <a data-role="backbutton" data-align="left">Back</a>
                     <span data-role="view-title"></span>
+                    <a class="button" id="saveButton" data-role="button" data-align="right" data-icon="add"></a>
                 </div>
             </header>
 
@@ -151,19 +152,9 @@
         </div>
 
         <!-- This view will display Agendas added to fav list -->
-        <script type="text/x-kendo-template" id="agenda-template">
-            <a href="">
-                <h3 class="item-title">#: title #</h3>
-                <p>
-                    <span>Speaker: #: speaker #</span><br/>
-                    <span>Duration: #: duration #</span>
-                </p>
-                <span class="item-date">#: date #</span>
-            </a>
-        </script>
         <div data-role="view" id="myagenda" data-title="Agenda" data-layout="mobile-tabstrip" data-show="showMe">
     		<div class="fullscreen-list">
-    			<ul id="myAgendaSessionView" data-role="listview" data-source="agendaData" data-temaplate="agenda-template">
+    			<ul id="myAgendaSessionView" data-role="listview" data-source="agendaData">
     			</ul>
     		</div>
     	</div>
@@ -412,6 +403,26 @@
                     </ul>
                 </div>
                 <p class="info">Allows you to upload your ratings for the sessions to the DevReach server. Thus, the feedback you give will reach us even if your internet connectivity is down.</p>
+                
+                <div id="maintenanceBox" class="dr-box dr-box-listview dr-box-form">
+                    <ul data-role="listview">
+                        <li>
+                            <label for="submitRatings">Get all data</label>
+                            <a id="refreshAllSessionData" data-click="getAllSessionsFromLiveData" data-role="button" enable="false">Download</a>
+                        </li>
+                    </ul>
+                </div>
+                <p class="info">Download and cache data for use during the event when internet connectivity is low.</p>
+                
+                <div id="maintenanceBox" class="dr-box dr-box-listview dr-box-form">
+                    <ul data-role="listview">
+                        <li>
+                            <label for="submitRatings">Refresh all data</label>
+                            <a id="refreshAllSessionData" data-click="refreshAllSessionsData" data-role="button">Reset</a>
+                        </li>
+                    </ul>
+                </div>
+                <p class="info">Clear all the cached data from the mobile device</p>
                 
                 <!--<table>
                     <tr>
@@ -666,8 +677,7 @@
                     
         </script>
             
-        <script type= "text/x-kendo-template" id="filteredSessionsTemplate">  
-        
+        <script type= "text/x-kendo-template" id="filteredSessionsTemplate">
             <a href="\#sessionDetails?sid=#= Session.SessionID#">
                 <h3>#= Session.Title # </h3>
                 <p>
@@ -709,13 +719,13 @@
                 <div id="sessionSSName" class="dr-box dr-box-listview">
                     <ul data-role="listview">
                         <li>
-                            Start : #= kendo.toString(new Date(new Date(parseInt(Session.SessionTimeSlot.FromTime.replace("/Date(", "").replace(")/", ""), 10) - 19800000)), "g")#
+                            Start: #= kendo.toString(new Date(new Date(parseInt(Session.SessionTimeSlot.FromTime.replace("/Date(", "").replace(")/", ""), 10) - 19800000)), "g")#
                         </li>
                         <li>
-                            End : #= kendo.toString(new Date(new Date(parseInt(Session.SessionTimeSlot.ToTime.replace("/Date(", "").replace(")/", ""), 10) - 19800000)), "g")#
+                            End: #= kendo.toString(new Date(new Date(parseInt(Session.SessionTimeSlot.ToTime.replace("/Date(", "").replace(")/", ""), 10) - 19800000)), "g")#
                         </li>
                         <li>
-                            Duration : #= Session.SessionTimeSlot.Durationinmins# Mins
+                            Duration: #= Session.SessionTimeSlot.Durationinmins# Mins
                         </li>
                     </ul>
                 </div>
