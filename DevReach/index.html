@@ -49,7 +49,7 @@
                             <a href="#speakers">Speakers</a>
                         </li>
                         <li data-icon="comment">
-                            <a href="#" id="notificationSubscriptionLink" onclick="subscribeForNotifications(); return false;">Notifications</a>
+                            <a href="#about" id="aboutEvent">About</a>
                         </li>
                         <li data-icon="certificate">
                             <a href="#sponsors">Sponsors</a>
@@ -153,6 +153,10 @@
 
         <!-- This view will display Agendas added to fav list -->
         <div data-role="view" id="myagenda" data-title="Agenda" data-layout="mobile-tabstrip" data-show="showMe">
+
+            <div class="dr-box" id="emptyAgenda">Oops! You haven’t built your agenda yet. Use the plus icon on any session screen to add the session to your agenda.
+<a href="#sessions" data-role="button">Find Sessions</a>
+</div>
     		<div class="fullscreen-list">
     			<ul id="myAgendaSessionView" data-role="listview" data-source="agendaData">
     			</ul>
@@ -248,55 +252,18 @@
                     <li data-icon="contacts">
                         <a href="#sessionbyspeaker">By Speaker</a>
                     </li>
-                    <li data-icon="calendar">
-                        <a href="#tracksession">By Date</a>
+                    <li data-icon="bookmarks">
+                        <a href="#tracksession">By Difficulty</a>
                     </li>
+                      <li data-icon="calendar">
+                        <a href="#timingView">By Date</a>
+                    </li>
+                    
                 </ul>
             </div>
         </div>
 
-        <!--             <div data-role="content" id="home-contents">
-			
-        <div id="tile-lists">
-        <div class="tile">
-        <a href="#allsession">
-        <img src="dicons/search_256.png" class="tile-image" /><br/>
-        All
-        </a>
-        </div>
-
-        <div class="tile" id="btc" >
-        <a href="#tracksession">
-        <img src="dicons/sessions_256.png" class="tile-image" /><br/>
-        By Tracks 
-        </a>
-        </div>	
-        <div class="tile">
-        <a href="#venuesession">
-        <img src="dicons/exchange_256.png" class="tile-image" /><br/>
-        By Venue
-        </a>
-        </div>
-
-        <div class="tile" >
-        <a href="#sessionbyspeaker">
-        <img src="dicons/fav_256.png" class="tile-image" /><br/>
-        By Speaker
-        </a>
-        </div>	
-                    
-                    
-        <div class="tile" >
-        <a href="#timingView">
-        <img src="dicons/ico_Pin.png" class="tile-image" /><br/>
-        By Date
-        </a>
-        </div>
-					
-                    
-        </div>
-        </div>
-        -->
+       
 
         <!-- ********************************************************************************* -->
         <!-- ************************************* About ************************************* -->
@@ -387,7 +354,7 @@
                     <ul data-role="listview">
                         <li>
                             <label for="notifications">Notifications</label>
-                            <input type="checkbox" id="notifications" data-role="switch" />
+                            <input type="checkbox" id="notifications" data-role="switch" data-change="changeNotificationSetting" />
                         </li>
                     </ul>
                 </div>
@@ -398,7 +365,7 @@
                     <ul data-role="listview">
                         <li>
                             <label for="submitRatings">Ratings</label>
-                            <a id="submitRatings" data-click="submitRatingsEverlive" data-role="button">Sync</a>
+                            <a id="submitRatings" data-click="submitRatingsEverlive" data-role="button" >Sync</a>
                         </li>
                     </ul>
                 </div>
@@ -706,13 +673,12 @@
                 <div id="sessionSName" class="dr-box dr-speaker-box">
                     #for (var i = 0;i < UserProfile.UserURLs.results.length;i++) {
                         if (UserProfile.UserURLs.results[i].SNTypeID===1) {#
-                            <img class="pullImage" alt="#= UserProfile.FirstName#
-                            " src= #=UserProfile.UserURLs.results[i].URL# />
+                            <img class="pullImage" alt="#= UserProfile.FirstName#" src= #=UserProfile.UserURLs.results[i].URL# />
                         #}
                         else {#
                         # }
                     }#
-                    #= UserProfile.FirstName# <strong>#UserProfile.LastName#</strong>
+                    <a href="\#speakerDetails?uid=#= UserProfile.UserId #">#= UserProfile.FirstName# #=UserProfile.LastName# </a>
                 </div>
                     
                 <h2>Details</h2>

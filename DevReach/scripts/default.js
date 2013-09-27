@@ -11,7 +11,7 @@ var fbClientID="1378904992343802";
 var app;
 var dateData = [{"dateTitle":"Day 1", "dateValue":"10/01/2013"}, 
     {"dateTitle":"Day 2", "dateValue":"10/02/2013"},
-{"dateTitle":"Pre-Event", "dateValue":"08/24/2013"}
+{"dateTitle":"Pre-Event", "dateValue":"09/30/2013"}
 ];
 
 var speakerDetailsData;
@@ -229,16 +229,25 @@ function showMe(e) {
     if (localStorage.myagenda) {
         dataReadFromLocalStorage = JSON.parse(localStorage["myagenda"]);
     }
-    var myAgendaData = new kendo.data.DataSource(
-        {
-                   
-        data : dataReadFromLocalStorage
-                            
+    var myAgendaData;
+    if (dataReadFromLocalStorage == null)
+    {
+        //$("#emptyAgenda").attr('style','visibility:visible');
+      $("#emptyAgenda").show(); 
+    }
+    else 
+    {
+         $("#emptyAgenda").hide(); 
+        myAgendaData = new kendo.data.DataSource(
+        {          
+        data : dataReadFromLocalStorage                     
     });
     
     if (myAgendaData != null) {
         myAgendaData.fetch(); 
     }
+    }
+    
    
     var template1 = kendo.template($("#filteredSessionsTemplate").text());
     $("#myAgendaSessionView").kendoMobileListView({
@@ -893,15 +902,22 @@ function contains(a, obj) {
 
 
 function savePersonalDetailsfn() {
-    var personalDetails = new Array();
-    var obj = {'name': $('#name').val()};
-    personalDetails.push(obj);
-    var obj1 = {'email':$('#email').val() };
-    personalDetails.push(obj1);
-    var obj2 = {'isAnonymous': $('#isAnonymous').data("kendoMobileSwitch").check()}
-    personalDetails.push(obj2);
-    localStorage['myDetails'] = JSON.stringify(personalDetails);
-    alert("Personal Details Saved");
+  if ((!$('#isAnonymous').data("kendoMobileSwitch").check() && $('#name').val()==='') || (!$('#isAnonymous').data("kendoMobileSwitch").check() && $('#email').val()===''))
+        {
+             navigator.notification.alert("Please enter your details");
+            return;
+        }
+    
+
+                var personalDetails = new Array();
+                var obj = {'name': $('#name').val()};
+                personalDetails.push(obj);
+                var obj1 = {'email':$('#email').val() };
+                personalDetails.push(obj1);
+                var obj2 = {'isAnonymous': $('#isAnonymous').data("kendoMobileSwitch").check()}
+                personalDetails.push(obj2);
+                localStorage['myDetails'] = JSON.stringify(personalDetails);
+                 navigator.notification.alert("Personal Details Saved");
 }
 
 function checkPersonalSettings() {
@@ -912,6 +928,18 @@ function checkPersonalSettings() {
         $('#email').val(personalDetails[1].email);
         $('#isAnonymous').data("kendoMobileSwitch").check(personalDetails[2].isAnonymous);
         $('#savePersonalDetails').text('Update');
+    }
+        else
+    {
+         navigator.notification.alert("Please provide your Details to proceed");
+    }
+    
+    if(localStorage.myReview)
+    {
+    var myreviewLS = JSON.parse(localStorage["myReview"]);
+    console.log(myreviewLS.length);
+    var submitratingbuttonmessage= "Sync Ratings ("+ myreviewLS.length + ")";
+    $('#submitRatings').text(submitratingbuttonmessage);
     }
  
 }
@@ -1148,25 +1176,20 @@ function removeFromNotification() {
     .then(
         function() {
 
-            alert('UnRegistered for notifications');
+            navigator.notification.alert('UnRegistered for notifications');
         },
     function(err) {
-        alert('REGISTER ERROR: ' + JSON.stringify(err));
+        navigator.notification.alert('Unregister Error: ' + JSON.stringify(err));
     }
     );
     
-    /*unregister(function() {
-        alert('Device successfully unregistered');
-    }, function() {
-        alert('Device unable to unregister');
-    });*/
 }
 
 // functions to save data to localStorage
 
 function saveDataLocally1(lKey, dObj) { 
     console.log('data saved');
-    if (localStorage.lKey)
+    if (localStorage[lKey])
     {
         var existingValue = JSON.parse(localStorage[lKey]);
         existingValue.push(dObj);
@@ -1321,11 +1344,11 @@ function fbLogin()
                     $("#email").val(data.email);  
                     savePersonalDetailsfn();
                 });
-                alert("Details Updated");
+                navigator.notification.alert("Details Updated");
             }
             else
             {
-                alert("Token not available.");
+                navigator.notification.alert("Token not available.");
             }
             //app.navigate('#home');
         })
@@ -1333,7 +1356,7 @@ function fbLogin()
                     app.hideLoading();
                    // if (err.code = 214) {
                      
-                        alert(err.message);
+                        navigator.notification.alert(err.message);
                     
                 });
         })
@@ -1362,11 +1385,26 @@ function makefbPost(FBmessage, FBLink, FBLinkName, fbToken)
         
  $.post(postURL,data)
     .done(function(results) {
-        alert("Status Posted");
+        navigator.notification.alert("Status Posted");
     })
         .error(function(err)
         {
             console.log(err);
-            alert(err);
+            navigator.notification.alert(err);
         }); 
+}
+
+
+function changeNotificationSetting(e)
+{
+    if (e.checked)
+    {
+     // Notifications has been enabled  
+        subscribeForNotifications();
+    }
+    else
+    {
+        // Notification has been disabled
+        removeFromNotification();
+    }
 }
