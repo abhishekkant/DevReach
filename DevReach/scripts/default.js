@@ -931,7 +931,10 @@ function checkPersonalSettings() {
     }
         else
     {
+        if (!$('#isAnonymous').data("kendoMobileSwitch").check())
+        {
          navigator.notification.alert("Please provide your Details to proceed",function(){},"DevReach Companion","OK");
+            }
     }
     
     if(localStorage.myReview)
