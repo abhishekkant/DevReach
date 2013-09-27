@@ -938,8 +938,8 @@ function checkPersonalSettings() {
     {
     var myreviewLS = JSON.parse(localStorage["myReview"]);
     console.log(myreviewLS.length);
-    var submitratingbuttonmessage= "Sync Ratings ("+ myreviewLS.length + ")";
-    $('#submitRatings').text(submitratingbuttonmessage);
+    var submitratingbuttonmessage= "Sync ("+ myreviewLS.length + ")";
+    $('#submitRatings').html(submitratingbuttonmessage);
     }
  
 }
@@ -980,25 +980,28 @@ function submitReview(e) {
 
 
 function submitRatingsEverlive(e) {
+    app.showLoading();
     if (localStorage.myReview)
     {
         var data = Everlive.$.data('SessionRatingsbyUser');
-        console.log('Filled PUG DS');
         var myreviewLS = JSON.parse(localStorage["myReview"]);
         data.create(myreviewLS,
         function(data){
+            localStorage.removeItem("myReview");
+            app.hideLoading();
        navigator.notification.alert("Ratings successfully submitted",function(){},"DevReach Companion","Done");
     },
         function(error){
+             app.hideLoading();
         navigator.notification.alert("Ratings were not successfully sent",function(){},"Error","Done");
     });
-        console.log('Now Deleting');
-        localStorage.removeItem("myReview");
-        console.log('Deleted');
+        
     }
     else
     {
-        console.log('No LS data found');
+        app.hideLoading();
+        
+navigator.notification.alert("No Ratings available to submit",function(){},"DevReach Companion","Done");
     }
 }
 
