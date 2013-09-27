@@ -917,7 +917,7 @@ function savePersonalDetailsfn() {
                 var obj2 = {'isAnonymous': $('#isAnonymous').data("kendoMobileSwitch").check()}
                 personalDetails.push(obj2);
                 localStorage['myDetails'] = JSON.stringify(personalDetails);
-                 navigator.notification.alert("Personal Details Saved");
+                 navigator.notification.alert("Personal Details Saved",function(){},"DevReach Companion","Done");
 }
 
 function checkPersonalSettings() {
@@ -931,7 +931,7 @@ function checkPersonalSettings() {
     }
         else
     {
-         navigator.notification.alert("Please provide your Details to proceed");
+         navigator.notification.alert("Please provide your Details to proceed",function(){},"DevReach Companion","OK");
     }
     
     if(localStorage.myReview)
@@ -987,10 +987,10 @@ function submitRatingsEverlive(e) {
         var myreviewLS = JSON.parse(localStorage["myReview"]);
         data.create(myreviewLS,
         function(data){
-        alert("Ratings successfully submitted");
+       navigator.notification.alert("Ratings successfully submitted",function(){},"DevReach Companion","Done");
     },
         function(error){
-        alert("Ratings were not successfully sent");
+        navigator.notification.alert("Ratings were not successfully sent",function(){},"Error","Done");
     });
         console.log('Now Deleting');
         localStorage.removeItem("myReview");
@@ -1081,11 +1081,10 @@ function onGeolocationError(error) {
 
 // Code for implementing Notification 
 function initializeNotification() {
-    var el = new Everlive(everliveKey);
     
     //el.push.currentDevice().getRegistration(successCallback, function() {alert("Registering the device.");currentDevice = el.push.currentDevice();});
     var onAndroidPushReceived = function(args) {
-        alert('Event Notification: ' + JSON.stringify(args.message)); 
+        navigator.notification.alert('Event Notification: ' + JSON.stringify(args.message),function(){},"DevReach Companion","Done"); 
     };
 
     var pushSettings = {
@@ -1098,7 +1097,10 @@ function initializeNotification() {
             senderID: GoogleProjectID
         },
         
-        notificationCallbackAndroid: onAndroidPushReceived
+        notificationCallbackAndroid: onAndroidPushReceived,
+        notificationCallbackIOS: function(e){
+            navigator.notification.alert('Event Notification: ' + JSON.stringify(e.alert),function(){},"DevReach Companion","Done");
+        },
     };
        var emulatorMode = false;
     var currentDevice = el.push.currentDevice(emulatorMode);
@@ -1109,36 +1111,29 @@ function initializeNotification() {
         function(initResult) {
             // $("#tokenLink").attr('href', 'mailto:dhananjay.25july@gmail.com?subject=Push Token&body=' + initResult.token);
             // $("#messageParagraph").html(successText + "Checking registration status...");
-            
-              
-                               
-                
+
                 currentDevice.pushToken = initResult.token;
           
             return currentDevice.getRegistration();
         },
         function(err) {
-            alert("ERROR!<br /><br />An error occured while initializing the device for push notifications.<br/><br/>" + err.message);
+            navigator.notification.alert("ERROR!<br /><br />An error occured while initializing the device for push notifications.<br/><br/>" + err.message, function(){},"Error","Done");
         }
         ).then(
                     function(registration) {
                         if (registration.result) {
                             //
                         } else {
-                            alert("Press Notifications to receive event messages");
+                            app.navigate("#settingsView");
+                            navigator.notification.alert("Please toggle Notifications to On", function(){},"DevReach Companion","Show Settings");
                         }
                     },
                     function(err) {
-                        alert("An error occured while checking device registration status");
+                        navigator.notification.alert("An error occured while checking device registration status",function(){},"Error","Done");
                     }
                 );
               
-    /*, function() {
-        alert('Initialized successfully');
-    }, function() {
-        alert('Initialization error');
-    });
-  
+    /*  
     if (!currentDevice.pushToken) {
         alert('Device token not generated');
        // return false;
@@ -1148,16 +1143,19 @@ function initializeNotification() {
 
 
 function subscribeForNotifications() {
+      app.showLoading();
     event.preventDefault();
     Everlive.$.push.currentDevice().register({ role: 'user' })
     .then(
         function() {
 
-            alert('Device Registered for notifications');
+  app.hideLoading();
+ navigator.notification.alert("Device Registered for notifications",function(){},"DevReach Companion","Done");
         },
     function(err) {
 
-        alert('Device already registered or Registration NOT successful: ' +err.code);
+        app.hideLoading();
+navigator.notification.alert("Device already registered or Registration NOT successful:" +err.code,function(){},"Error","Done");
     }
     );
 
