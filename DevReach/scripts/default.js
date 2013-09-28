@@ -168,6 +168,10 @@ function getSessionsBySpeakers()
             data: JSON.parse(localStorage.speakers)
         });
         
+        
+    speakerData.fetch();
+    console.log(speakerData);
+        
     }
     else {
         console.log("In Live section");
@@ -202,6 +206,7 @@ function getSessionsBySpeakers()
     
     
     speakerData.fetch();
+    console.log(speakerData);
    
     
     var speakersListTemplate4Session = kendo.template($("#speakersbySessionTemplate").html());
