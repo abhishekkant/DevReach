@@ -237,9 +237,9 @@
                     <li data-icon="contacts">
                         <a href="#sessionbyspeaker">By Speaker</a>
                     </li>
-                    <li data-icon="bookmarks">
+                  <!--  <li data-icon="bookmarks">
                         <a href="#tracksession">By Difficulty</a>
-                    </li>
+                    </li>-->
                       <li data-icon="calendar">
                         <a href="#timingView">By Date</a>
                     </li>
@@ -467,33 +467,36 @@
 
         <script type= "text/x-kendo-template" id="sessionTimeListtemplate">
 
-            <a href="\#sessionDetails?sid=#= SessionID#">#= Title # <br/>
+            <a href="\#sessionDetails?sid=#= SessionID#"><h3>#= Title # </h3>
 
-                <span class="listTime">
-            
+               <p>            
                     #var a = parseInt(SessionTimeSlot.FromTime.replace("/Date(", "").replace(")/", ""), 10) - 19800000 #
                     #=  kendo.toString(new Date(a), "g")#    (#= SessionTimeSlot.Durationinmins# mins)
-                </span> </a>
+                </p> </a>
         </script>
         
-        <div id="timingSessionListView" data-role="view" data-title="Sessions" data-show="sessionTimeClick">
+        <div id="timingSessionListView" data-role="view" data-title="Sessions" data-show="sessionTimeClick" class="listsbg">
+              <div class="fullscreen-list">
             <ul id="sessionListView">
             </ul>
+                  </div>
         </div>
         
         <script type="text/x-kendo-template" id="timingListtemplate">
-            <span>
+
                 <a href="\#timingSessionListView?selDate=#= dateValue#" data-role="listview-link" class="km-listview-link">#= dateTitle#</a>
-            </span> 
+
         </script>
 
         <!-- This view is for showing timing list -->
-        <div id="timingView" data-role="view" class="listsbgs" data-show="dayshow" >
+        <div id="timingView" data-role="view" class="menu-list" data-show="dayshow" >
+            
             <ul id="timingListView"
                 data-role = "listview"
                 data-template = "timingListtemplate"
                 data-style = "inset"
                 data-source = "dateDS"></ul>
+
         </div>
 
         <!-- This View is Review view for the Session and Speaker -->

@@ -148,8 +148,7 @@ function getSpeakers(e)
     $("#speakersView").kendoMobileListView({
         dataSource: speakerData,
         template:speakersListTemplate,
-        style:"inset"
-               
+        style:"inset"         
     }); 
    
 }
@@ -406,8 +405,10 @@ function venueListViewClick(e) {
  sessionsByVenueData.fetch();
     console.log(sessionsByVenueData);
     var template1 = kendo.template($("#filteredSessionsTemplate").text());
+    
     var vlistview = $("#sessioninVenueList").data("kendoMobileListView");
     if(vlistview) vlistview.destroy();
+    
     $("#sessioninVenueList").kendoMobileListView({
         dataSource: sessionsByVenueData,
         template:template1,
@@ -452,10 +453,9 @@ function sessionTimeClick(e) {
     }
 });
     
-    console.log("hi");
+
     sessionTimeDS.fetch();
-    console.log(sessionTimeDS);
-    console.log("hello");
+
    
     var sessionTimeListtemplate = kendo.template($("#sessionTimeListtemplate").html());
     $("#sessionListView").kendoMobileListView({
@@ -685,7 +685,7 @@ function getAllSessions() {
                                 cache: "inmemory",
                                 read: {
                     
-                                url: baseURL + "/SessionAttendees?$expand=UserProfile,Session,Session/SessionTimeSlot,UserProfile/UserURLs&$filter=AttendeeType eq 11&$select=Session/SessionID,UserProfile/UserId,UserProfile/FirstName,UserProfile/UserURLs/URL,Session&$orderby=Session/SessionTimeSlot/FromTime",
+                                url: baseURL + "/SessionAttendees?$expand=UserProfile,Session,Session/SessionTimeSlot,UserProfile/UserURLs&$filter=AttendeeType eq 11&$select=Session/SessionID,UserProfile/UserId,UserProfile/FirstName,UserProfile/LastName,UserProfile/UserURLs/URL,Session&$orderby=Session/SessionTimeSlot/FromTime",
                                 dataType: "jsonp",
                     
                                 data: {
