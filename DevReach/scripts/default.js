@@ -94,25 +94,59 @@ var PUGEverliveDS = new kendo.data.DataSource({
 
 function getSpeakers(e)
 {
+        var speakersListTemplate = kendo.template($("#speakersTemplate").html());
     
-    var speakerData;
+        var listviewTD = $("#speakersView").data("kendoMobileListView");
+    if(listviewTD)
+    {
+    listviewTD.destroy();
+        }
+    var speakerData,spDatafromLS;
     if (localStorage.speakers) {
         console.log("In LS");
-        var spDatafromLS = JSON.parse(localStorage.speakers);
+        spDatafromLS = JSON.parse(localStorage.speakers);
         speakerData = new kendo.data.DataSource({
             data: spDatafromLS
         });
+          speakerData.fetch(); 
         
+        $("#speakersView").kendoMobileListView({
+        dataSource: speakerData,
+        template:speakersListTemplate,
+        style:"inset"
+    }); 
     }
     else {
         console.log("In Live section");
-        speakerData = new kendo.data.DataSource(
+
+        var speakerDataLive = new kendo.data.DataSource(
             {
             type: "odata",
                 change: function(e) {
                         // to retrieve the data from the datasource and save it to the local storage
-                      
-                        saveDataLocally1('speakers', this.data());
+                    var speakersNotUnique = e.items;
+                    
+                    
+                var uniqSpeakers = [];
+                    
+                $.each(speakersNotUnique, function(i, el) {
+                    for (var i = 0;i < uniqSpeakers.length;i++) { 
+                        if (el.UserProfile.UserId === uniqSpeakers[i].UserProfile.UserId)
+                            break;
+                    }
+                    if (i == uniqSpeakers.length)
+                    {
+                    uniqSpeakers.push(el);
+                        }
+                });
+                    
+                    $("#speakersView").kendoMobileListView({
+        dataSource: new kendo.data.DataSource({data: uniqSpeakers}),
+        template:speakersListTemplate,
+        style:"inset"         
+    }); 
+                    localStorage.speakers = JSON.stringify(uniqSpeakers);
+                    
                     },
             transport: {
                     cache: "inmemory",
@@ -133,25 +167,9 @@ function getSpeakers(e)
             serverfiltering: true,  
             batch: false
         });
+        speakerDataLive.read();
     }
-    
-    
-    speakerData.fetch();
-   
-    
-    var speakersListTemplate = kendo.template($("#speakersTemplate").html());
-    
-        var listviewTD = $("#speakersView").data("kendoMobileListView");
-    if(listviewTD)
-    {
-    listviewTD.destroy();
-        }
-    
-    $("#speakersView").kendoMobileListView({
-        dataSource: speakerData,
-        template:speakersListTemplate,
-        style:"inset"         
-    }); 
+
    
 }
 
@@ -160,7 +178,12 @@ function getSpeakers(e)
 
 function getSessionsBySpeakers()
 {
-    
+    var speakersListTemplate4Session = kendo.template($("#speakersbySessionTemplate").html());
+    var listviewTD = $("#speakersViewforSession").data("kendoMobileListView");
+    if (listviewTD)
+    {
+        listviewTD.destroy();
+    }
     var speakerData;
     if (localStorage.speakers) {
         console.log("In LS");
@@ -170,18 +193,47 @@ function getSessionsBySpeakers()
         
         
     speakerData.fetch();
-    console.log(speakerData);
+      $("#speakersViewforSession").kendoMobileListView({
+        dataSource: speakerData,
+        template:speakersListTemplate4Session,
+        style:"inset",
+        click: displaysessionsbyspeaker
+               
+    }); 
+    
         
     }
     else {
         console.log("In Live section");
+        
+         
         speakerData = new kendo.data.DataSource(
             {
             type: "odata",
                 change: function(e) {
                         // to retrieve the data from the datasource and save it to the local storage
-                      
-                        saveDataLocally1('speakers', this.data());
+                         var speakersNotUnique = e.items;
+                    
+                    
+                var uniqSpeakers = [];
+                    
+                $.each(speakersNotUnique, function(i, el) {
+                    for (var i = 0;i < uniqSpeakers.length;i++) { 
+                        if (el.UserProfile.UserId === uniqSpeakers[i].UserProfile.UserId)
+                            break;
+                    }
+                    if (i == uniqSpeakers.length)
+                    {
+                    uniqSpeakers.push(el);
+                        }
+                });
+                    
+                    $("#speakersView").kendoMobileListView({
+        dataSource: new kendo.data.DataSource({data: uniqSpeakers}),
+        template:speakersListTemplate,
+        style:"inset"         
+    }); 
+                    localStorage.speakers = JSON.stringify(uniqSpeakers);
                     },
             transport: {
                     cache: "inmemory",
@@ -204,31 +256,13 @@ function getSessionsBySpeakers()
         });
     }
     
-    
-    speakerData.fetch();
     console.log(speakerData);
    
     
-    var speakersListTemplate4Session = kendo.template($("#speakersbySessionTemplate").html());
-    var listviewTD = $("#speakersViewforSession").data("kendoMobileListView");
-    if (listviewTD)
-    {
-        listviewTD.destroy();
-    }
-    $("#speakersViewforSession").kendoMobileListView({
-        dataSource: speakerData,
-        template:speakersListTemplate4Session,
-        style:"inset",
-        click: displaysessionsbyspeaker
-               
-    }); 
-    
+   
+  
     
 }
-
-
-
-
 
 
 function showMe(e) {
@@ -238,7 +272,6 @@ function showMe(e) {
     var myAgendaData;
     if (dataReadFromLocalStorage == null)
     {
-        //$("#emptyAgenda").attr('style','visibility:visible');
       $("#emptyAgenda").show(); 
     }
     else 
@@ -371,7 +404,7 @@ function displaysessionsbyspeaker(e) {
             console.log(arguments);
         }
     });
-   // sessionsOfSpeakers.fetch();
+
     var template1 = kendo.template($("#filteredSessionsTemplate").html());
     $("#sessionsOfSpeakerList").kendoMobileListView({
         dataSource: sessionsOfSpeakers,
@@ -547,7 +580,7 @@ function tracksShow(){
         change: function(e) {
                                     // to retrieve the data from the datasource and save it to the local storage
                                      console.log('change');
-                                     saveDataLocally1('tracks',this.data());
+                                     saveDataLocally1('tracks',e.items);
                                 },
     transport: {
             cache: "inmemory",
@@ -608,7 +641,7 @@ function venueListClick() {
        change: function(e) {
                                     // to retrieve the data from the datasource and save it to the local storage
                                      console.log('change');
-                                     saveDataLocally1('venues',this.data());
+                                     saveDataLocally1('venues',e.items);
                                 },
             transport: {
                     cache: "inmemory",
@@ -686,7 +719,7 @@ function getAllSessions() {
                         change: function(e) {
                                     // to retrieve the data from the datasource and save it to the local storage
                                      console.log('change');
-                                     saveDataLocally1('allSessionData',this.data());
+                                     saveDataLocally1('allSessionData',e.items);
                                 },
                         transport: {
                                 cache: "inmemory",
