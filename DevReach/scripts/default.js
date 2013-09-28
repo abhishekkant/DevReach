@@ -98,8 +98,9 @@ function getSpeakers(e)
     var speakerData;
     if (localStorage.speakers) {
         console.log("In LS");
+        var spDatafromLS = JSON.parse(localStorage.speakers);
         speakerData = new kendo.data.DataSource({
-            data: JSON.parse(localStorage.speakers)
+            data: spDatafromLS
         });
         
     }
@@ -145,6 +146,7 @@ function getSpeakers(e)
     {
     listviewTD.destroy();
         }
+    
     $("#speakersView").kendoMobileListView({
         dataSource: speakerData,
         template:speakersListTemplate,
